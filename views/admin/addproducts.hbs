@@ -1,0 +1,183 @@
+
+
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Add Product</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section " style="margin-right: 300px;">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+               <h5 class="card-title">   </h5> 
+
+              <!-- General Form Elements -->
+              <form method="post" action="/admin/addproduct" onsubmit="return validation()" enctype="multipart/form-data">
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Product Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="productname" id="productname" onkeyup="validateProductName()"><span id="name" class="text-danger"></span>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label" >Product Price</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="price" onkeyup="validPrice()" id="price"><span id="Price" class="text-danger"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Stock Left</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="stockleft" onkeyup="validStock()" id="stock"><span id="Stock" class="text-danger"></span>
+                  </div>
+                </div>
+               
+
+
+                 <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Brand</label>
+                  <div class="col-sm-10">
+                      {{!-- <input name="brand" id="brand" onkeyup="validBrand()"><span id="Brand" class="text-danger"></span> --}}
+                        <select   name="brand" id="brand"  class="form-select" onkeyup="validBrand()" ><span id="Brand" class="text-danger"></span>
+                          {{#each category}}
+                          <option value="{{this._id}}" >{{this.Brand}}</option>
+                          {{/each}}
+                        </select>
+                </div>
+                </div>
+
+
+
+                 <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Product Image</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="custom-file-input" name="image" id="gallery-photo-add" multiple required accept="image/jpg, image/jpeg, image/png, image/webp">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" style="height: 100px" name="Description" id="Description" onkeyup="validateProductDescription() "></textarea><span id="productdescription" class="text-danger"></span>
+                  </div>
+                </div>
+
+
+
+                <div class="row mb-3">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+ 
+
+  <!-- Template Main JS File -->
+  <script src="/assets2/js/main.js"></script>
+
+  <script>
+
+
+
+    var errorName = document.getElementById('name')
+    var errordescription = document.getElementById('productdescription')
+    var errorBrand = document.getElementById('Brand')
+    var errorPrice = document.getElementById('Price')
+    var errorStock = document.getElementById('Stock')
+    function validateProductName() {
+        const name = document.getElementById('productname').value;
+        if (name == "") {
+            errorName.innerHTML = '*'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z0-9 ]*$/)) {
+            errorName.innerHTML = '*'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorName.innerHTML = '*'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+    }
+
+    function validateProductDescription() {
+        const name = document.getElementById('Description').value;
+        if (name == "") {
+            errordescription.innerHTML = '*'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+           errordescription.innerHTML = '*'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errordescription.innerHTML = '*'
+            return false
+        }if (name.length < 10) {
+			
+           errordescription.innerHTML = "enter proper description "
+            return false
+        }
+        errordescription.innerHTML = null
+        return true
+    }
+    function validBrand() {
+        const brand = document.getElementById('brand').value
+        if (brand == "") {
+            errorBrand.innerHTML = "*"
+            return false
+        }
+        errorBrand.innerHTML = null
+        return true
+    }
+
+     function validPrice() {
+        const price = document.getElementById('price').value
+        if (price == "") {
+            errorPrice.innerHTML = "*"
+            return false
+        }
+        errorPrice.innerHTML = null
+        return true
+    }
+      function validStock() {
+        const stock = document.getElementById('stock').value
+        if (stock == "") {
+            errorStock.innerHTML = "*"
+            return false
+        }
+        errorStock.innerHTML = null
+        return true
+    }
+
+    function validation() {
+        if (!validateProductName() || !validPrice() ||!validStock() || !validBrand()  || !validateProductDescription()   ) {
+            return false
+        }
+        return true
+    }
+</script>
+

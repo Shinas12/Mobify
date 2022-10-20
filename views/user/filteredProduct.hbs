@@ -1,0 +1,256 @@
+      <style>
+            .wishlistB{ background-color: transparent;border:solid white 1px;border-radius: 100px } .heartI{ color:red; } 
+            </style>
+    <div class="page-wrapper">
+
+
+        <main class="main">
+
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+                <div class="container">
+                    <ol class="breadcrumb">
+
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                	<div class="row">
+                		<div class="col-lg-9">
+                			<div class="toolbox">
+
+
+
+                			</div><!-- End .toolbox -->
+
+
+                           
+
+                            <div class="products mb-3" id="mydiv">
+                                 {{#each filteredProduct}}
+                                <div class="product product-list">
+                                     
+                                    <div class="row">
+                                        <div class="col-6 col-lg-3">
+                                            <figure class="product-media">
+                                                {{!-- <span class="product-label label-new">{{this.productname}}</span> --}}
+                                                <a href="/product/{{this._id}}">
+                                                    <img src="/images/product/{{this.img.[0]}}"  style="width:200px ; height: 200px;" alt="Product image" class="product-image">
+                                                </a>
+                                            </figure><!-- End .product-media -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                                        <div class="col-6 col-lg-3 order-lg-last">
+                                            <div class="product-list-action">
+                                               {{#if this.catdetails.[0].offerApplied}}
+
+                                                  <div class="product-price" style="display: block;">
+                                                   <h5 class="product-price"><s>Rs:{{this.original}}</s>&nbsp;&nbsp;&nbsp;{{this.offerPercentage}}%off</h5>
+                                                   <div class="product-price" >
+                                                    Rs: {{this.price}}
+                                                   </div>
+                                                   
+
+                                                </div>
+
+
+                                              {{else}}
+
+                                                <div class="product-price">
+                                                    Rs:{{this.price}}
+                                                </div><!-- End .product-price -->
+
+
+
+                                                {{/if}}
+
+                                                <div class="ratings-container">
+                                                    <div class="ratings">
+                                                        <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                                                    </div><!-- End .ratings -->
+                                                    <span class="ratings-text">( 2 Reviews )</span>
+                                                </div><!-- End .rating-container -->
+
+
+
+                                                  {{#if this.stockleft}}
+
+                                                  {{#ifGotoCart ../user ../CartItems this._id }}
+
+
+                                                   <a href="/cartview"  class="btn-product btn-cart "><span>go to cart</span></a>
+
+                                                  {{else}}
+
+                                                   <a href="/cart/?orderId={{../this._id}}"  class="btn-product btn-cart"><span>add to cart</span></a>
+
+                                                  {{/ifGotoCart}}
+
+                                                  {{else}}
+
+                                                <p class="text-danger">Out Of Stock</p>  
+
+                                                  {{/if}}
+                                            </div><!-- End .product-list-action -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                                        <div class="col-lg-6">
+                                            <div class="product-body product-action-inner">
+
+                                                {{#Wish ../user ../Wish this._id }}
+
+
+                                                <button id="wishlistBu{{this._id}}" class="wishlistB" onclick="addToWishlist('{{../this._id}}')"><i class="fa fa-heart heartI" id="heartIcon{{../this._id}}"  aria-hidden="true"></i></button>
+
+                        
+                                                
+                                               {{else}}
+                                                <button id="wishlistBu{{this._id}}" class="wishlistB" onclick="addToWishlist('{{../this._id}}')"><i class="fa fa-heart-o" id="heartIcon{{../this._id}}"  aria-hidden="true"></i></button>
+
+                                                {{/Wish}}
+                                                
+
+                                                <div class="product-cat">
+                                                    
+                                                    <a >{{this.catdetails.[0].Brand}}</a>
+                                                </div><!-- End .product-cat -->
+                                                <h3 class="product-title"><a href="product.html">{{this.productname}}</a></h3><!-- End .product-title -->
+
+                                                <div class="product-content">
+                                                    <p>{{this.Description}}</p>
+                                                </div><!-- End .product-content -->
+                                                
+                                                <div class="product-nav product-nav-thumbs">
+                                                    <a>
+                                                        <img src="/images/product/{{this.img.[1]}}"  style="width:40px ; height: 40px;" alt="product desc">
+                                                    </a>
+                                                    <a >
+                                                        <img src="/images/product/{{this.img.[2]}}"  style="width:40px ; height: 40px;" alt="product desc">
+                                                    </a>
+
+                                                    <a >
+                                                        <img src="/images/product/{{this.img.[3]}}"  style="width:40px ; height: 40px;" alt="product desc">
+                                                    </a>
+                                                </div><!-- End .product-nav -->
+                                            </div><!-- End .product-body -->
+                                        </div><!-- End .col-lg-6 -->
+                                    </div><!-- End .row -->
+                                      
+                                </div><!-- End .product -->
+                                {{/each}}
+                                
+
+
+
+
+
+
+
+
+
+
+
+                            </div><!-- End .products -->
+                            
+
+                			<nav aria-label="Page navigation">
+							    <ul class="pagination">
+							        {{!-- {{#ifEquals '1' currentPage}}
+							        <li class="page-item disabled" >
+							            <a class="page-link page-link-prev" href="/category/?page={{../previous.page}}" aria-label="Previous" tabindex="-1">
+							                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+							            </a>
+							        </li>
+									{{else}}
+									 <li class="page-item">
+							            <a class="page-link page-link-prev" href="/category/?page={{../previous.page}}" aria-label="Previous" tabindex="-1" >
+							                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+							            </a>
+							        </li>
+									{{/ifEquals}} --}}
+									{{#each pages}}
+
+									<li class="page-item " aria-current="page"><a class="page-link" href="/category/?page={{this}}">{{this}}</a></li>
+									
+									{{/each}}
+									{{!-- {{#ifEquals pageCount currentPage}}
+							        <li class="page-item disabled" >
+							            <a class="page-link page-link-next" href="/category/?page={{../next.page}}" aria-label="Next">
+							                Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+							            </a>
+							        </li>
+									{{else}}
+									 <li class="page-item">
+							            <a class="page-link page-link-next" href="/category/?page={{../next.page}}" aria-label="Next">
+							                Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+							            </a>
+							        </li>
+									{{/ifEquals}} --}}
+							    </ul>
+							</nav>
+                		</div><!-- End .col-lg-9 -->
+                		<aside class="col-lg-3 order-lg-first">
+                			<div class="sidebar sidebar-shop">
+                				<div class="widget widget-clean">
+                					<label>Filters</label>
+
+                				</div><!-- End .widget widget-clean -->
+
+
+
+
+
+
+
+        						<div class="widget widget-collapsible">
+    								<h3 class="widget-title">
+									    <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
+									        Brand
+									    </a>
+									</h3><!-- End .widget-title -->
+
+									<div class="collapse show" id="widget-4">
+										<div class="widget-body">
+											<div class="filter-items">
+                                                <form action="/filteredProduct" method="post">
+                                                {{#each category}}
+                                               
+
+                                               
+                                                        <div class="filter-item">
+                                                            <div class="custom-control custom-checkbox">
+
+                                                                  {{#checkbox ../filteredProduct this._id}}
+                                                                <input type="checkbox" class="custom-control-input" id="brand-1{{../this._id}}" value="{{../this._id}}" name="filtering" checked>
+                                                                {{else}}
+                                                                  <input type="checkbox" class="custom-control-input" id="brand-1{{../this._id}}" value="{{../this._id}}" name="filtering">
+                                                                   {{/checkbox}}
+                                                                <label class="custom-control-label" for="brand-1{{this._id}}">{{this.Brand}}</label>
+                                                            </div><!-- End .custom-checkbox -->
+                                                        </div><!-- End .filter-item -->
+
+
+                                               
+                                                {{/each}}
+                                                <br>
+                                                <button type="submit" class="btn btn-outline-primary btn-round" style="width: 8px;">filter</button>
+
+                                               </form>
+
+											</div><!-- End .filter-items -->
+										</div><!-- End .widget-body -->
+									</div><!-- End .collapse -->
+        						</div><!-- End .widget -->
+
+
+                			</div><!-- End .sidebar sidebar-shop -->
+                		</aside><!-- End .col-lg-3 -->
+                	</div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+
+    <script src="/javascripts/ajaxCountCall.js"></script>

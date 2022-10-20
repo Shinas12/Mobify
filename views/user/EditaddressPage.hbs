@@ -1,0 +1,292 @@
+                	<div class="cta cta-separator mb-5 container">
+	                	<div class="row">
+
+                         
+
+
+                          
+                         
+
+
+	                		<div class="col-12">
+
+                              
+
+
+
+
+                                            <div class="cta-wrapper text-center">
+
+                                                {{#if errMessage}}
+                                                <div class="text-center">
+                                                <p style="color: #FCB941 ;">{{errMessage}}</p>
+                                                </div>
+                                                {{/if}}
+
+                                               
+
+
+                                    
+                                        
+                                                            <form action="/AddresssaveChanges" method="post" onsubmit="return check()">
+
+                                                            <input type="text" value="{{addrss._id}}" name="_id" hidden>
+
+                                                            
+                                                                <span id="name" style="color:#FCB941 ;"></span>
+                                                                <input type="text"  class="form-control form-control-rounded" id="Name"  placeholder="Name" value="{{addrss.AdDetails.CustomerName}}" name="CustomerName" >
+                                                           
+
+
+                                                           
+                                                                <span id="email" style="color:#FCB941 ;"></span>
+                                                                <input type="email"  class="form-control form-control-rounded" id="Email"  placeholder="Email" value="{{addrss.AdDetails.CustomerEmail}}" name="CustomerEmail">
+                                                           
+
+
+                                                         
+                                                                <span id="phonenumbers" style="color:#FCB941 ;"></span>
+                                                                <input type="text" class="form-control form-control-rounded" id="phonenumber"  placeholder="Phone Number" value="{{addrss.AdDetails.CustomerPhone}}" name="CustomerPhone">
+
+                                                                 <span id="housename" style="color:#FCB941 ;"></span>
+                                                                <input type="text"  class="form-control form-control-rounded" id="Housename"  placeholder="Housename" value="{{addrss.AdDetails.Address.Housename}}" name="Housename">
+
+
+
+                                                                <span id="landMark" style="color:#FCB941 ;"></span>
+                                                                <input type="text"  class="form-control form-control-rounded" id="LandMark"  placeholder="LandMark" value="{{addrss.AdDetails.Address.LandMark}}" name="LandMark">
+
+
+                                                                <span id="pincode" style="color:#FCB941 ;"></span>
+                                                                <input type="text"  class="form-control form-control-rounded" id="Pincode"  placeholder="Pincode" value="{{addrss.AdDetails.Address.Pincode}}" name="Pincode">
+
+
+                                                                <span id="street" style="color:#FCB941 ;"></span>
+                                                                <input type="text"  class="form-control form-control-rounded" id="Street"  placeholder="Street" value="{{addrss.AdDetails.Address.Street}}" name="Street">
+
+                                                                <span id="city" style="color:#FCB941 ;"></span>
+                                                                <input type="text"  class="form-control form-control-rounded" id="City"  placeholder="City" value="{{addrss.AdDetails.Address.City}}" name="City">
+
+                                                                 <span id="state" style="color:#FCB941 ;"></span>
+                                                                <input type="text"  class="form-control form-control-rounded" id="State"  placeholder="Street" value="{{addrss.AdDetails.Address.State}}" name="State">
+                                                              
+
+
+                                                                <button class="btn btn-primary" type="submit"><span>Save Changes</span><i class="icon-long-arrow-right"></i></button>
+                                                            </form><br>
+
+
+                                                
+                                           
+
+
+                                            </div><!-- End .cta-wrapper -->
+
+
+                                            
+                                
+	                		
+                        </div><!-- End .col-lg-6 -->
+
+                      
+                           
+
+
+	                	</div><!-- End .row -->
+                	</div><!-- End .cta -->
+
+                    		     
+
+
+<script>
+    var errorName = document.getElementById('name')
+    var errorEmail = document.getElementById('email')
+	var errorPhonenumber = document.getElementById('phonenumbers')
+    var errorhousename = document.getElementById('housename') 
+    var errorlandMark = document.getElementById('landMark') 
+    var errorpincode = document.getElementById('pincode') 
+    var errorstreet = document.getElementById('street') 
+    var errorcity = document.getElementById('city') 
+    var errorstate = document.getElementById('state') 
+
+
+    function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorName.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorName.innerHTML = 'enter a valid name'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+    }
+    function validEmail() {
+        const email = document.getElementById('Email').value
+        if (email == "") {
+            errorEmail.innerHTML = "enter you email address"
+            return false
+        }
+        if (!email.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            errorEmail.innerHTML = 'enter a proper email address'
+            return false
+        }
+        errorEmail.innerHTML = null
+        return true
+    }
+    
+
+	 function validPhoneumber() {
+        const mob = document.getElementById('phonenumber').value
+        if (mob == "") {
+            errorPhonenumber.innerHTML = "enter a phonenumber"
+            return false
+        }
+        if (mob.length < 10 || !mob.match(/^\d*$/)) {
+            errorPhonenumber.innerHTML = "Please Enter the valide phone number"
+            return false
+        }
+        errorPhonenumber.innerHTML = null
+        return true
+    }
+
+        function validHousename() {
+        const name = document.getElementById('Housename').value;
+        if (name == "") {
+            errorhousename.innerHTML = 'enter valid entry'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorhousename.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorhousename.innerHTML = 'enter a valid entry'
+            return false
+        }
+        errorhousename.innerHTML = null
+        return true
+    }
+
+     function validLandMark() {
+        const name = document.getElementById('LandMark').value;
+        if (name == "") {
+            errorlandMark.innerHTML = 'enter valid entry'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorlandMark.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorlandMark.innerHTML = 'enter a valid entry'
+            return false
+        }
+        errorlandMark.innerHTML = null
+        return true
+    }
+
+        
+
+    	 function validPincode() {
+        const mob = document.getElementById('Pincode').value
+        if (mob == "") {
+            errorpincode.innerHTML = "Enter Valid Entry"
+            return false
+        }
+        if (mob.length < 6 || !mob.match(/^\d*$/)) {
+            errorpincode.innerHTML = "Enter Valid Entry"
+            return false
+        }
+        errorpincode.innerHTML = null
+        return true
+    }
+
+    function validStreet(){
+        const name = document.getElementById('Street').value;
+        if (name == "") {
+            errorstreet.innerHTML = 'enter valid entry'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorstreet.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorstreet.innerHTML = 'enter a valid entry'
+            return false
+        }
+        errorstreet.innerHTML = null
+        return true
+    }
+
+    function validCity(){
+        const name = document.getElementById('City').value;
+        if (name == "") {
+            errorcity.innerHTML = 'enter valid entry'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorcity.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorcity.innerHTML = 'enter a valid entry'
+            return false
+        }
+        errorcity.innerHTML = null
+        return true
+    }
+
+    function validState(){
+        const name = document.getElementById('State').value;
+        if (name == "") {
+            errorstate.innerHTML = 'enter valid entry'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorstate.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorstate.innerHTML = 'enter a valid entry'
+            return false
+        }
+        errorstate.innerHTML = null
+        return true
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+        function check(){
+              let validatearray =[!validateName() , !validEmail() , !validPhoneumber() ,!validHousename(), !validLandMark(), !validPincode(), !validStreet(), !validCity(), !validState()]
+
+              return validatearray.every(validation)
+              
+
+        }
+
+  
+
+    function validation() {
+        if (!validateName() || !validEmail() ||  !validPhoneumber() || !validHousename() || !validLandMark() || !validPincode() || !validStreet() || !validCity() || !validState()) {
+            return false
+        }
+        return true
+    }
+</script>

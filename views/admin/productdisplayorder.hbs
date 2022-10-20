@@ -1,0 +1,168 @@
+<div id="main">
+
+<section class="section">
+
+
+    <div class="row align-items-top">
+        
+        <div class="col-4">
+
+          <!-- Default Card -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Booked Details</h5>
+             <h5><strong>Name : </strong> <small>{{order.[0].DeliveryDetails.CustomerName}}</small> </h5>
+             <h5><strong>Email : </strong><small>{{order.[0].DeliveryDetails.CustomerEmail}}</small></h5>
+             <h5><strong>Phone : </strong><small>{{order.[0].DeliveryDetails.CustomerPhone}}</small></h5>
+            </div>
+          </div>
+          </div>
+
+
+           <div class="col-4">
+
+          <!-- Default Card -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Address Details</h5>
+
+               <h5><strong>HouseName : </strong> <small>{{order.[0].DeliveryDetails.Address.Housename}}</small> </h5>
+             <h5><strong>LandMark : </strong><small>{{order.[0].DeliveryDetails.Address.LandMark}}</small></h5>
+             <h5><strong>Street : </strong><small>{{order.[0].DeliveryDetails.Address.Street}}</small></h5>
+               <h5><strong>City : </strong><small>{{order.[0].DeliveryDetails.Address.City}}</small></h5>
+             <h5><strong>State : </strong><small>{{order.[0].DeliveryDetails.Address.State}}</small></h5>
+              
+            </div>
+          </div>
+          </div>
+
+           <div class="col-4">
+
+          <!-- Default Card -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Other Details</h5>
+
+               <h5><strong>Payment Method : </strong> <small>{{order.[0].CustomerPaymentMethod}}</small> </h5>
+             <h5><strong>Payment status : </strong><small>{{order.[0].status}}</small></h5>
+             <h5><strong>date : </strong><small>{{order.[0].date}}</small></h5>
+              
+            </div>
+          </div>
+          </div>
+
+          {{#if order.[0].CouponApplied}}
+
+          <div class="col-4 offset-4">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Coupon Details</h5>
+
+               <h5><strong>Coupon Name : </strong> <small>{{order.[0].coupondetails.[0].couponName}}</small> </h5>
+             <h5><strong>Coupon Discount  : </strong><small>{{order.[0].DiscountPercentage}}%</small></h5>
+             <h5><strong>Discounted Price : </strong><small>{{order.[0].DiscountedAmount}}</small></h5>
+             <h5><strong>Order Total After Discount : </strong><small>{{order.[0].GrandTotal}}</small></h5>
+              
+            </div>
+          </div>
+
+          </div>
+          {{/if}}
+
+
+
+         
+          </div>
+
+
+
+
+
+      <div class="row align-items-top">
+        {{#each product}}
+        <div class="col-12">
+
+         
+          <div class="card">
+            <div class="card-body">
+              
+
+              <table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+      <th scope="col">Shipping</th>
+      {{#unless this.cancelled}}
+       <th scope="col">Action</th>
+       {{/unless}}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td> <img src="/images/product/{{this.productdetails.img.[0]}}" style="width: 50px;height: 50px ;" alt="" srcset=""> </td>
+      <td>{{this.productdetails.productname}}</td>
+      <td>{{this.catdetails.[0].Brand}}</td>
+      <td>{{this.productdetails.price}}</td>
+      <td>{{this.product.quantity}}</td>
+      <td>{{this.total}}</td>
+      <td>{{this.product.shipping}}</td>
+      {{#unless this.cancelled}}
+      <td>
+    
+
+                                                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered{{this._id}}{{this.productdetails._id}}">
+                                                                                  Edit Order Status
+                                                                                </button>
+                                                                                <div class="modal fade" id="verticalycentered{{this._id}}{{this.productdetails._id}}" tabindex="-1">
+                                                                                  <div class="modal-dialog modal-dialog-centered">
+                                                                                    <div class="modal-content">
+                                                                                      <div class="modal-header">
+                                                                                        <h5 class="modal-title">Order Status</h5>
+
+                                                                                      </div>
+                                                                                      <div class="modal-body">
+                                                                                        <select class="form-select" aria-label="Default select example" id="shipping{{this._id}}{{this.productdetails._id}}">
+                                                                                          <option selected >{{this.product.shipping}}</option>
+                                                                                         {{#if this.Return}}
+                                                                                         
+                                                                                          <option >Refund-Completed</option>
+                                                                                          {{else}}
+                                                                                          <option >Shipped</option>
+                                                                                          <option >Delivered</option>
+                                                                                          {{/if}}
+
+                                                                                        </select>
+                                                                                      </div>
+                                                                                      <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                        <button type="button" class="btn btn-primary" onclick=" Shipping('{{this._id}}','{{this.productdetails._id}}')"> Save changes</button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div><!-- End Vertically centered Modal-->
+
+
+      </td>
+      {{/unless}}
+    </tr>
+
+  </tbody>
+</table>
+              
+            </div>
+          </div>
+          </div>
+
+          {{/each}}
+          </div>
+    </section>
+
+    </div>
+
+    <script src="/javascripts/ajaxCountCall.js"></script>

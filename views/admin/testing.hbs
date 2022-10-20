@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.3.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+     
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+
+      
+                  <div class="row" >
+  
+  <h5 class="card-title">All Order Details</h5>
+
+                    {{#each AdminorderSummarry}}
+
+                              <div class="col-12">
+
+                                <div class="card">
+                                  <div class="card-body">
+                                    
+
+                                    <!-- Accordion without outline borders -->
+                                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    
+                                  
+
+                                      <div class="accordion-item">
+
+                                        
+
+                                              <h2 class="accordion-header" id="flush-headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{this._id}}{{this.productdetails._id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                      
+
+                                                                            {{!-- <div class="card">
+                                                                              <div class="card-body"> --}}
+                                                                               
+
+                                                                                      
+
+                                                                                      <h6>{{this.DeliveryDetails.CustomerName}}</h6>  &nbsp; &nbsp;  <span>-</span>
+                                                                                      &nbsp; &nbsp;<img src="/images/product/{{this.productdetails.img.[0]}}" style="width: 50px; height: 45px;" alt=""> 
+                                                                                        &nbsp;  &nbsp; <span>-</span> &nbsp;  &nbsp;
+                                                                                        <h6>{{this.productdetails.productname}}</h6> 
+                                                                                        &nbsp; &nbsp; <span>-</span> &nbsp; &nbsp;
+                                                                                          <h6>{{this.product.shipping}}</h6>{{#if DiscountedPrice}} &nbsp; &nbsp; <span>-</span> &nbsp; &nbsp;<h6>Discount Applied</h6> {{/if}} 
+                                                                                       
+                                                                                          
+                                                                                         
+                                                                                          
+
+                                                                                        
+
+                                                       {{#unless cancelled}}
+                                                                                <!-- Vertically centered Modal -->
+                                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered{{this._id}}{{this.productdetails._id}}">
+                                                                                  Edit Order Status
+                                                                                </button>
+                                                                                <div class="modal fade" id="verticalycentered{{this._id}}{{this.productdetails._id}}" tabindex="-1">
+                                                                                  <div class="modal-dialog modal-dialog-centered">
+                                                                                    <div class="modal-content">
+                                                                                      <div class="modal-header">
+                                                                                        <h5 class="modal-title">Order Status</h5>
+
+                                                                                      </div>
+                                                                                      <div class="modal-body">
+                                                                                        <select class="form-select" aria-label="Default select example" id="shipping{{this._id}}{{this.productdetails._id}}">
+                                                                                          <option selected >{{this.product.shipping}}</option>
+                                                                                          {{#if Return}}
+                                                                                         
+                                                                                          <option >Refund-Completed</option>
+                                                                                          {{else}}
+                                                                                          <option >Shipped</option>
+                                                                                          <option >Delivered</option>
+                                                                                          {{/if}}
+                                                                                        </select>
+                                                                                      </div>
+                                                                                      <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                        <button type="button" class="btn btn-primary" onclick=" Shipping('{{this._id}}','{{this.productdetails._id}}')"> Save changes</button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div><!-- End Vertically centered Modal-->
+
+                                                                              {{!-- </div>
+                                                                            </div> --}}
+                                                      {{/unless}}
+                                                    
+                                                </button> 
+                                              </h2>
+                                              <div id="flush-collapseOne{{this._id}}{{this.productdetails._id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">    
+                                            
+                                            
+                                          
+                                            
+                                                          <div class="card">
+                                                              <div class="card-body">
+                                                                  <h5 class="card-title">Delivery Details</h5>
+                                                                
+                                                                  <!-- List group with custom content -->
+                                                                  <ol class="list-group list-group-numbered">
+
+
+                                                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                      <div class="ms-2 me-auto">
+                                                                        <div class="fw-bold">User Details</div>
+                                                                        <p>------------------------------</p>
+                                                                            <strong>Name:</strong>   &nbsp;  {{this.DeliveryDetails.CustomerName}} <br>
+                                                                            <strong>Email:</strong>  &nbsp; {{this.DeliveryDetails.CustomerEmail}} <br>
+                                                                            <strong>Phone:</strong>  &nbsp;  {{this.DeliveryDetails.CustomerPhone}} <br>
+
+                                                                      </div>
+                                                                    </li>
+
+
+                                                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                      <div class="ms-2 me-auto">
+                                                                        <div class="fw-bold">User Address Details</div>
+                                                                        <p>------------------------------</p>
+                                                                              <strong>HouseName:</strong>    &nbsp; {{this.DeliveryDetails.Address.Housename}} <br>
+                                                                                <strong>Landmark:</strong>   &nbsp;   {{this.DeliveryDetails.Address.LandMark}} <br>
+                                                                                <strong>Pincode:</strong>   &nbsp;  {{this.DeliveryDetails.Address.Pincode}} <br>
+                                                                                <strong>Street:</strong>   &nbsp;  {{this.DeliveryDetails.Address.Street}} <br>
+                                                                                <strong>City:</strong>   &nbsp;  {{this.DeliveryDetails.Address.City}} <br>
+                                                                                <strong>State:</strong>  &nbsp;  {{this.DeliveryDetails.Address.State}} <br>
+                                                                      
+                                                                      </div>
+                                                                    </li>
+
+
+                                                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                      <div class="ms-2 me-auto">
+                                                                        <div class="fw-bold">Product Details</div>
+                                                                        <p>------------------------------</p>
+                                                                        <img src="/images/product/{{this.productdetails.img.[0]}}" style="width: 50px; height: 45px;" alt=""> <br>
+                                                                              <strong>Name:</strong>    &nbsp; {{this.productdetails.productname}} <br>
+                                                                                <strong>Brand:</strong>   &nbsp; {{this.catdetails.[0].Brand}} <br>
+                                                                                <strong>Price:</strong>   &nbsp; {{this.productdetails.price}} <br>
+                                                                                <strong>Qty:</strong>   &nbsp; {{this.product.quantity}} <br>
+                                                                                 <strong>Total:</strong>   &nbsp; {{this.total}} <br>
+
+                                                                                 {{#if this.DiscountedPrice}}
+                                                                                 <strong>DiscountPercentage:</strong>   &nbsp; {{this.DiscountPercentage}}%<br>
+                                                
+                                                                                 <strong>Total After Discount:</strong>   &nbsp; {{this.DiscountedPrice}} <br>
+                                                                                 {{/if}}
+                                                      
+                                                                      </div>  
+                                                                    </li>
+
+                                                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                      <div class="ms-2 me-auto">
+                                                                        <div class="fw-bold">Other Details</div>
+                                                                        <p>------------------------------</p>
+
+                                                                              <strong>Date:</strong>    &nbsp; {{this.date}} <br>
+                                                                                <strong>PaymentMethod:</strong>   &nbsp; {{this.CustomerPaymentMethod}} <br>
+                                                                                <strong>PaymentStatus:</strong>   &nbsp; {{this.status}} <br>
+                                                                                <strong>OrderStatus:</strong>   &nbsp; {{this.product.shipping}} &nbsp; &nbsp; 
+
+
+
+
+                                                                      </div>    
+                                                                    </li>
+
+
+
+
+                                                                  </ol><!-- End with custom content -->
+
+                                                              </div>
+                                                          </div>
+                                
+                                          
+                                
+                                
+                                
+                                                </div>
+                                              </div>
+                                              
+                                          
+                                      </div>
+
+                                
+                                    </div><!-- End Accordion without outline borders -->
+
+                                  </div>
+                                </div>
+
+                              </div>
+                    {{/each}}
+                  </div> 
+
+
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+
+
+  
+
+ <script src="/javascripts/ajaxCountCall.js"></script>
+
+</body>
+
+</html>

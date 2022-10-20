@@ -1,0 +1,335 @@
+
+
+<body >
+
+      	
+
+
+
+    <div class="page-wrapper">
+
+
+
+        <main class="main">
+        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        		<div class="container">
+        			<h1 class="page-title">Checkout</h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+
+
+
+{{#if adrs}}
+                     <div class="container starter-template" style="display: block;" id="adrsLess">
+							<h5>Already Booked Address</h5>
+                        <div class="row">
+						
+                            {{#each adrs}}
+                           
+                            <div class="col-6 col-md-4 col-lg-4 col-xl-3" >
+                                
+                                   
+                                    <a>
+
+                                    <div class="product-body hover-div"  onclick="Addressfill ('{{this._id.CustomerName}}','{{this._id.Address.Housename}}')">
+
+
+                                        <small>{{this._id.Address.Housename}}</small><br>
+                                        <small>{{this._id.Address.LandMark}}</small><br>
+                                        <small>{{this._id.Address.Street}}</small><br>
+                                        <small>{{this._id.Address.City}}</small><br>
+                                        <small>{{this._id.Address.State}}</small><br>
+                                         <small>{{this._id.CustomerPhone}}</small><br>
+
+
+                                    </div><!-- End .product-body -->
+
+                                     </a>
+                              
+                            </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                           
+                        {{/each}}
+
+						
+		                		<span style="margin-top: 80px;" id="more">
+		                		<a onclick="getmoreaddress()" class="btn btn-primary btn-round btn-shadow"><span>show more</span><i class="icon-long-arrow-right"></i></a>
+		                         </span>
+                      
+                        </div>
+  
+
+                    </div>
+
+
+
+
+
+
+
+					 <div class="container starter-template" style="display: none;" id="adrsMore">
+							<h5>Already Booked Address</h5>
+                        <div class="row">
+						
+                            {{#each adrsMore}}
+                           
+                            <div class="col-6 col-md-4 col-lg-4 col-xl-3" >
+                                
+                                   
+                                    <a>
+
+                                    <div class="product-body hover-div"  onclick="Addressfill ('{{this._id.CustomerName}}','{{this._id.Address.Housename}}')">
+
+
+                                        <small>{{this._id.Address.Housename}}</small><br>
+                                        <small>{{this._id.Address.LandMark}}</small><br>
+                                        <small>{{this._id.Address.Street}}</small><br>
+                                        <small>{{this._id.Address.City}}</small><br>
+                                        <small>{{this._id.Address.State}}</small><br>
+                                         <small>{{this._id.CustomerPhone}}</small><br>
+
+
+                                    </div><!-- End .product-body -->
+
+                                     </a>
+                              
+                            </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                           
+                        {{/each}}
+
+						
+		                		
+
+								 <span style="margin-top: 80px;" id="less" style="display: none;">
+		                		<a onclick="getlessaddress()" class="btn btn-primary btn-round btn-shadow"><span>show less</span><i class="icon-long-arrow-left"></i></a>
+		                         </span>
+                      
+                        </div>
+  
+
+                    </div>
+
+ {{/if}}                   
+
+
+                     
+
+
+
+
+            <div class="page-content">
+            	<div class="checkout">
+	                <div class="container">
+            			<div class="checkout-discount">
+            				<form action="#">
+        						<input type="text" class="form-control" required id="checkout-discount-input">
+            					<label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
+            				</form>
+            			</div><!-- End .checkout-discount -->
+            			<form id="form">
+		                	<div class="row">
+		                		<div class="col-lg-9">
+		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+		                				<div class="row">
+		                					<div class="col-sm-12">
+		                						<label>First Name *</label>
+		                						<input type="text" class="form-control" name="name" required id="name" >
+												<input type="text" class="form-control" name="userId" value="{{user._id}}" hidden >
+		                					</div><!-- End .col-sm-6 -->
+
+		                					{{!-- <div class="col-sm-6">
+		                						<label>Last Name *</label>
+		                						<input type="text" class="form-control" required>
+		                					</div><!-- End .col-sm-6 --> --}}
+		                				</div><!-- End .row -->
+
+	            						<label>House Name</label>
+	            						<input type="text" class="form-control" name="housename" required id="housename">
+
+	            						{{!-- <label>Country *</label>
+	            						<input type="text" class="form-control" name="country" required> --}}
+
+	            						<label>Street address *</label>
+	            						<input type="text" class="form-control"  name="streetName" required id="streetName">
+	            						<input type="text" class="form-control" name="landMark" required id="landMark">
+
+	            						<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>Town / City *</label>
+		                						<input type="text" class="form-control" name="City" required id="City">
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>State  *</label>
+		                						<input type="text" class="form-control" name="state" required id="state">
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+		                				<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>PIN CODE</label>
+		                						<input type="text" class="form-control" name="PinCode" required id="PinCode" >
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>Phone *</label>
+		                						<input type="tel" class="form-control" name="Phone" required id="Phone">
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+	                					<label>Email address *</label>
+	        							<input type="email" class="form-control" name="email" required id="email">
+
+	        							{{!-- <div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="checkout-create-acc">
+											<label class="custom-control-label" for="checkout-create-acc">Create an account?</label>
+										</div><!-- End .custom-checkbox -->
+
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="checkout-diff-address">
+											<label class="custom-control-label" for="checkout-diff-address">Ship to a different address?</label>
+										</div><!-- End .custom-checkbox --> --}}
+
+	                					<label>Order notes (optional)</label>
+	        							<textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+		                		</div><!-- End .col-lg-9 -->
+		                		<aside class="col-lg-3">
+		                			<div class="summary">
+		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+		                				<table class="table table-summary">
+		                					<thead>
+		                						<tr>
+		                							<th>Product</th>
+		                							<th>Total</th>
+		                						</tr>
+		                					</thead>
+
+		                					<tbody>
+												{{#each product}}
+		                						<tr>
+		                							<td>{{this.productdetails.productname}} ({{this.product.quantity}})</td>
+		                							<td>{{this.total}}</td>
+		                						</tr>
+                                             {{/each}}
+
+											 
+		                						<tr class="summary-subtotal">
+		                							<td>Subtotal:</td>
+		                							<td>{{total}}</td>
+
+
+
+
+												{{#if discount}}
+
+                                                   
+
+
+		                						</tr><!-- End .summary-subtotal -->
+		                						<tr>
+		                							<td>Discount:</td>
+		                							<td>{{discount.[0].discountedPrice}}</td>
+		                						</tr>
+		                						<tr class="summary-total">
+		                							<td>Total:</td>
+		                							<td>{{discount.[0].TotalAfterDiscount}}</td>
+		                						</tr><!-- End .summary-total -->
+
+
+                                                
+
+												{{else}}
+
+
+		                						<tr class="summary-total">
+		                							<td>Total:</td>
+		                							<td>{{total}}</td>
+		                						</tr><!-- End .summary-total -->
+
+
+												{{/if}}
+		                					</tbody>
+		                				</table><!-- End .table table-summary -->
+
+		                				<div class="accordion-summary" id="accordion-payment">
+										    <div class="card mt-1">
+										        <div class="card-header" id="heading-1">
+										            <h2 class="card-title">
+										               <input type="radio" name="paymentMethod" value="cod"  required>Cash On Delivery
+										            </h2>
+										        </div><!-- End .card-header -->
+
+										    </div><!-- End .card -->
+
+										    <div class="card mt-1">
+										        <div class="card-header" id="heading-2">
+										            <h2 class="card-title">
+										                <input type="radio" name="paymentMethod" value="RazorPay">Razor Pay 
+										            </h2>
+										        </div><!-- End .card-header -->
+
+										    </div><!-- End .card -->
+
+										    {{!-- <div class="card mt-1">
+										        <div class="card-header" id="heading-3">
+										            <h2 class="card-title">
+										                <input type="radio" name="paymentMethod" value="GooglePay">Google Pay 
+										            </h2>
+										        </div><!-- End .card-header -->
+
+										    </div><!-- End .card --> --}}
+
+										    <div class="card mt-1">
+										        <div class="card-header" id="heading-4">
+										            <h2 class="card-title">
+
+										                  <input type="radio" name="paymentMethod" value="PayPal" >Pay Pal 
+										                
+										            </h2>
+										        </div><!-- End .card-header -->
+
+										    </div><!-- End .card -->
+
+
+
+
+
+												
+															{{!-- <div class="card mt-1">
+																<div class="card-header" id="heading-5">
+																	<h2 class="card-title">
+
+																			<input type="radio" name="paymentMethod" value="creditCard" >Credit Card (Stripe)
+																			
+																		
+																	</h2>
+																</div><!-- End .card-header -->
+																
+														   </div><!-- End .card --> --}}
+
+
+								       </div><!-- End .accordion -->
+
+		                				<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+		                					<span class="btn-text">Place Order</span>
+		                					<span class="btn-hover-text">Proceed to Checkout</span>
+		                				</button>
+		                			</div><!-- End .summary -->
+		                		</aside><!-- End .col-lg-3 -->
+		                	</div><!-- End .row -->
+							  <button class="btn btn-warning" type="reset">Clear</button> 
+            			</form>
+
+                       
+
+	                </div><!-- End .container -->
+                </div><!-- End .checkout -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+

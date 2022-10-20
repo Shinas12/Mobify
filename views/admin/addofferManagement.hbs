@@ -1,0 +1,178 @@
+<div id="main">
+
+          <div class="card">
+            <div class="card-body">
+              
+
+              <!-- Bordered Tabs Justified -->
+              <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true">Offer Applied</button>
+                </li>
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Offer Not Applied</button>
+                </li>
+                {{!-- <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+                </li> --}}
+              </ul>
+              <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+                <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
+
+
+              <div class="card-body">
+
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each offer}}
+                      <tr>
+                       
+                        <td><img src="/images/product/{{this.img.[0]}}" alt="" srcset="" style="width: 85px;height: 78px;"></td>
+                        <td>{{this.Brand}}</td>
+                        <td>{{this.offerPercentage}}%</td>
+                        <td>
+                            
+                            
+                            
+
+                            <a href="/admin/deleteOffer/?Brandid={{this._id}}&percentage={{this.offerPercentage}}" class="btn btn-info">Delete Offer</a>
+                            
+                            
+                            
+                          </td>
+                      </tr>
+                        {{/each}}
+
+
+                    </tbody>
+                  </table>
+
+                </div>
+                   
+
+                </div>
+                <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+                
+                <div class="card-body">
+
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                         <th scope="col">Image</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each offerNot}}
+                      <tr>
+                        <td><img src="/images/product/{{this.img.[0]}}" alt="" srcset="" style="width: 85px;height: 78px;"></td>
+                        <td>{{this.Brand}}</td>
+                        <td>
+
+                   <div class="card">
+            <div class="card-body">
+
+
+              <!-- Vertically centered Modal -->
+              <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#verticalycentered{{this._id}}">
+                Add Offer
+              </button>
+              <div class="modal fade" id="verticalycentered{{this._id}}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add Percentage</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+
+                      <form action="/admin/offerAdd" onsubmit="return validoffercheck('{{this._id}}')" method="post">
+
+                        
+
+                    <input type="text" class="form-control" name="_id"  value="{{this._id}}" hidden></span>
+                    <input type="number" class="form-control" name="offerPercentage" id="stock{{this._id}}">  <br>
+                    
+
+
+                      <button type="submit" class="btn btn-primary">Update</button>
+
+                      </form>
+
+
+                    </div>
+                    
+                  </div>
+                </div>
+              </div><!-- End Vertically centered Modal-->
+
+            </div>
+          </div>
+
+
+                        </td>
+                      </tr>
+                     {{/each}}
+
+
+                    </tbody>
+                  </table>
+
+                </div>
+                 
+                </div>
+
+              </div><!-- End Bordered Tabs Justified -->
+
+            </div>
+          </div>
+
+
+
+</div>
+
+  <script>
+
+     function validoffer(id) {
+        const stock = document.getElementById('stock'+id).value
+        if (stock == "") {
+            
+            return false
+        }
+        if(stock > 100){
+            return false
+        }
+       
+        return true
+    }
+     
+
+    
+
+    function validoffercheck(id) {
+        if (!validoffer(id) ) {
+            return false
+             
+        }
+        return true
+    }
+
+
+</script>

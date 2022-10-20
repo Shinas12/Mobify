@@ -1,0 +1,150 @@
+<style>
+    .block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #04AA6D;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+</style>
+
+<div id="main" >
+    <div class="row">
+        {{#each specificordersdetails}}
+        <div class="col-4 " >
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Address Details</h5>
+
+            
+            <br>
+
+            <h5>HouseName : <small>{{this.DeliveryDetails.Address.Housename}}</small></h5> 
+            <h5>LandMark : <small>{{this.DeliveryDetails.Address.LandMark}}</small></h5> 
+            <h5>PinCode : <small>{{this.DeliveryDetails.Address.Pincode}}</small></h5> 
+            <h5>Street : <small>{{this.DeliveryDetails.Address.Street}}</small></h5> 
+            <h5>City : <small>{{this.DeliveryDetails.Address.City}}</small></h5> 
+            <h5>State : <small>{{this.DeliveryDetails.Address.State}}</small></h5> 
+             </div>
+
+          </div>
+        </div>
+
+        <div class="col-4 ">
+
+          <div class="row">
+
+            <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Booked Details</h5>
+
+          
+            <br>
+            <h5>Name : <small>{{this.DeliveryDetails.CustomerName}}</small></h5> 
+            <h5>Email : <small>{{this.DeliveryDetails.CustomerEmail}}</small></h5> 
+            <h5>Phone: <small>{{this.DeliveryDetails.CustomerPhone}}</small></h5> 
+             </div>
+
+          </div>
+          </div>
+
+          {{#if this.CouponApplied}}
+
+          <div class="col-12">
+
+                              
+
+         
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Coupon Details</h5>
+
+               <h5><strong>Coupon Name : </strong> <small>{{this.Coupondetails.[0].couponName}}</small> </h5>
+             <h5><strong>Coupon Discount  : </strong><small>{{this.DiscountPercentage}}%</small></h5>
+
+              
+            </div>
+          </div>
+
+         
+          
+
+
+          </div>
+{{/if}}
+
+          </div>
+        </div>
+
+     
+
+        <div class="col-4 ">
+
+           <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Other Details</h5>
+
+          
+            <br>
+
+            <h5>Payment: <small>{{this.CustomerPaymentMethod}}</small></h5>
+            <h5>PaymentStatus: <small>{{this.status}}</small></h5>  
+            <h5>Date : <small>{{this.date}}</small></h5> 
+            <h5>Status: <small>{{this.product.shipping}}</small></h5> 
+             </div>
+
+          </div>
+        </div><br><br>
+
+
+ {{#unless this.cancelled}}
+
+
+                                                                                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered{{this._id}}{{this.product.item}}">
+                                                                                  Edit Order Status
+                                                                                </button>
+                                                                                <div class="modal fade" id="verticalycentered{{this._id}}{{this.product.item}}" tabindex="-1">
+                                                                                  <div class="modal-dialog modal-dialog-centered">
+                                                                                    <div class="modal-content">
+                                                                                      <div class="modal-header">
+                                                                                        <h5 class="modal-title">Order Status</h5>
+
+                                                                                      </div>
+                                                                                      <div class="modal-body">
+                                                                                        <select class="form-select" aria-label="Default select example" id="shipping{{this._id}}{{this.product.item}}">
+                                                                                          <option selected >{{this.product.shipping}}</option>
+                                                                                         {{#if this.Return}}
+                                              
+                                                                                          <option >Refund-Completed</option>
+                                                                                          {{else}}
+                                                                                          <option >Shipped</option>
+                                                                                          <option >Delivered</option>
+                                                                                          {{/if}}
+
+                                                                                        </select>
+                                                                                      </div>
+                                                                                      <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                        <button type="button" class="btn btn-primary" onclick=" Shipping('{{this._id}}','{{this.product.item}}')"> Save changes</button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div><!-- End Vertically centered Modal-->
+                                                                                {{/unless}}
+
+                                                                                <script src="/javascripts/ajaxCountCall.js"></script>
+        {{/each}}
+    </div><br><br>
+
+   
+
+
+
+
+
+</div>

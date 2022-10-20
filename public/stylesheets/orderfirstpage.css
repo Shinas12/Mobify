@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+  }
+  .main {
+    padding: 30px 50px;
+    background: #fff;
+    display: inline-block;
+    position: relative;
+  }
+  
+  /* Default corner box & extention style */
+  .main .corner {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 20px;
+    height: 20px;
+    
+  }
+  .main .corner-extention {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    
+    transition: all ease-in-out 0.3s;
+  }
+  
+  /* Top-left corner style */
+  .main .corner.corner-tl {
+    top: 0;
+    left: 0;
+    border-top: 3px solid #5964F1;
+    border-left: 3px solid #5964F1;
+  }
+  .main .corner-extention.corner-tl {
+    height: 3px;
+    min-width: 1px;
+    background: #5964F1;
+    top: 0;
+    left: 0;
+  }
+  .main:hover .corner-extention.corner-tl {
+    min-width: 100%;
+  }
+  
+  /* Top-right corner style */
+  .main .corner.corner-tr {
+    top: 0;
+    right: 0;
+    border-top: 3px solid #5964F1;
+    border-right: 3px solid #5964F1;
+  }
+  .main .corner-extention.corner-tr {
+    width: 3px;
+    min-height: 0;
+    background: #5964F1;
+    top: 0;
+    right: 0;
+  }
+  .main:hover .corner-extention.corner-tr {
+    min-height: 100%;
+  }
+  
+  /* Bottom-left corner style */
+  .main .corner.corner-bl {
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid #5964F1;
+    border-left: 3px solid #5964F1;
+  }
+  .main .corner-extention.corner-bl {
+    width: 3px;
+    min-height: 0;
+    background: #5964F1;
+    bottom: 0;
+    left: 0;
+  }
+  .main:hover .corner-extention.corner-bl {
+    min-height: 100%;
+  }
+  
+  /* Bottom-right corner style */
+  .main .corner.corner-br {
+    bottom: 0;
+    right: 0;
+    border-bottom: 3px solid #5964F1;
+    border-right: 3px solid #5964F1;
+  }
+  .main .corner-extention.corner-br {
+    height: 3px;
+    min-width: 0;
+    background: #5964F1;
+    bottom: 0;
+    right: 0;
+  }
+  .main:hover .corner-extention.corner-br {
+    min-width: 100%;
+  }
+  .content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

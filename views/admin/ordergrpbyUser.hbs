@@ -1,0 +1,24 @@
+<div id="main">
+ 
+  <ul class="responsive-table">
+    <li class="table-header">
+    
+      <div class="col col-4">Customer Name</div>
+      <div class="col col-4">Email</div>
+      <div class="col col-4">Action</div>
+
+    </li>
+    {{#each groupOrdersuserId}}
+    <li class="table-row">
+      
+      <div class="col col-4" data-label="Customer Name">{{this.user.name}}</div>
+      <div class="col col-4" data-label="Amount">{{this.user.email}}</div>
+      <div class="col col-4" data-label="Amount"><a href="/admin/getuserfullOrder/{{this.user._id}}"><button class="btn btn-primary" >All orders </button></a></div>
+      
+      
+    </li>
+    {{/each}}
+
+  </ul>
+</div>
+

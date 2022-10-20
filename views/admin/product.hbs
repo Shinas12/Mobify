@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
+
+ 
+</head>
+
+
+
+
+
+            <div class="col-9" id="main">
+
+              <a href="/admin/addProduct" class="btn btn-primary">Add Product</a>
+              <div class="card recent-sales ">
+
+                
+
+
+
+                <div class="card-body">
+
+
+                  <table class="table table-borderless datatable">
+                      <thead>
+                        <tr class="table-success">
+                          <th scope="col"> Number</th>
+                          <th scope="col"> Name</th>
+                          <th scope="col"> Id</th>
+                          <th scope="col">Category</th>
+                          {{!-- <th scope="col">Description</th> --}}
+                          <th scope="col">Price</th>
+                          <th scope="col">Stock</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Action</th>
+                          
+                        </tr>
+                      </thead>
+                    <tbody>
+                        {{#each getProductInfomration}}
+                        <tr id="tcol">
+                          <td>{{this.count}}</td>
+                          <td>{{this.productname}}</td>
+                          <td>{{this._id}}</td> 
+                          <td>{{this.BrandDetails.[0].Brand}}</td>
+                          {{!-- <td>{{this.Description}}</td> --}}
+                          <td>{{this.price}}</td>
+                          <td>{{this.stockleft}}</td> 
+                          <td><img src="/images/product/{{this.img.[0]}}" style="width: 50px; height: 45px;" alt=""></td>
+                          <td ><a href="/admin/edit-user/{{this._id}}" class="btn btn-primary">Edit</a>
+                          
+
+
+
+
+
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered{{this._id}}">
+                Stock Update
+              </button>
+              <div class="modal fade" id="verticalycentered{{this._id}}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  
+                  <div class="modal-content">
+
+                    <div class="modal-header">
+                      <h5 class="modal-title">Stock Update</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body" >
+
+                      <form action="/admin/edit-Stock" onsubmit="return validation()" method="post">
+
+                        
+
+                    <input type="text" class="form-control" name="_id"  value="{{this._id}}" hidden></span>
+                    <input type="number" class="form-control" name="stock" id="stock" value="{{this.stockleft}}" onkeyup="validStock()">  <br>
+
+
+                      <button type="submit" class="btn btn-primary">Update</button>
+
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+                          {{!-- <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('are you sure')">Delete</a> --}}
+                          {{#if this.block}}
+                          <a href="/admin/unblock-user/{{this._id}}" class="btn btn-success" >Activate</a>
+                          {{else}}
+                          <a href="/admin/block-user/{{this._id}}" class="btn btn-danger" >Block</a>
+                          {{/if}}
+                          </td>
+                        
+
+                          
+                        </tr> 
+                        {{/each}} 
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+
+
+
+
+   
+
+  {{!-- <script src="/assets2/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets2/vendor/chart.js/chart.min.js"></script>
+  <script src="/assets2/vendor/echarts/echarts.min.js"></script>
+  <script src="/assets2/vendor/quill/quill.min.js"></script>
+  <script src="/assets2/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/assets2/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/assets2/vendor/php-email-form/validate.js"></script> --}}
+
+  <!-- Template Main JS File -->
+  {{!-- <script src="/assets2/js/main.js"></script> --}}
+
+
+
+  <script>
+    
+    var errorStock = document.getElementById('Stock')
+
+
+     function validStock() {
+        const stock = document.getElementById('stock').value
+        if (stock == "") {
+            
+            return false
+        }
+       
+        return true
+    }
+     
+
+    
+
+    function validation() {
+        if (!validStock() ) {
+            return false
+             
+        }
+        return true
+    }
+
+
+</script>

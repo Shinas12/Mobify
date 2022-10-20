@@ -1,0 +1,43 @@
+figurey {
+    width: 100px;
+    height: 100px;
+  }
+  .thumbnail {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  
+  .thumbnail > img {
+    max-width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  .thumbnail div {
+    position: absolute;
+    background: #fff;
+    color:#FDCC74;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.1s ease;
+    line-height: 100px;
+    text-align: center;
+    font-size: 25px;
+    z-index: 2;
+    border-style: solid;
+    border-color: #FDCC74;
+  }
+  
+  .thumbnail:hover > img {
+    transform: scale(1.3);
+  }
+  
+  .thumbnail:hover > div {
+    opacity: 1;
+  }
+  
+  

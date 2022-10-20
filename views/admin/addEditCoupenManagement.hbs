@@ -1,0 +1,214 @@
+          <div class="card" id="main">
+
+
+            {{#if  errMessage}}
+             <div classs="container p-5" >
+	<div class="row no-gutters" style="margin-left: 250px;">
+		<div class="col-lg-5 col-md-12">
+			<div class="alert alert-danger fade show" role="alert">
+				<a href="/admin/addEditCoupenManagement" class="close btn" data-dismiss="alert" aria-label="Close">
+			    	<span aria-hidden="True">&times;</span>
+			  	</a>
+			 	<h4 class="alert-heading">Sad!</h4>
+			  	<p>{{errMessage}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+            {{/if}}
+
+            {{#if successMessage}}
+           <div classs="container p-5" >
+	<div class="row no-gutters" style="margin-left: 250px;">
+		<div class="col-lg-5 col-md-12">
+			<div class="alert alert-success fade show" role="alert">
+				<a href="/admin/addEditCoupenManagement" class="close btn" data-dismiss="alert" aria-label="Close">
+			    	<span aria-hidden="True">&times;</span>
+			  	</a>
+			 	<h4 class="alert-heading">Well done!</h4>
+			  	<p>{{successMessage}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+{{/if}}
+
+
+
+
+
+         <div class="card-body">
+         
+
+              <!-- Pills Tabs -->
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Add Coupon</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">See Coupon</button>
+                </li>
+                {{!-- <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+                </li> --}}
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="home-tab">
+                  
+
+
+
+                                <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">General Form Elements</h5>
+
+              <!-- General Form Elements -->
+              <form action="/admin/addCoupon" method="post">
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Coupon Code</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="couponName">
+                  </div>
+                </div>
+
+                  <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Discount</label>
+                  <div class="col-sm-10">
+                    <input type="tel" class="form-control" name="Discount">
+                  </div>
+                </div>
+
+
+
+
+                
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Expiry Date</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" name="ExpDate">
+                    <input type="text" class="form-control" name="OfferApplied" hidden value="false">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Submit Button</label>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+
+
+
+
+
+
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                     
+
+     <main  class="main"> 
+
+    
+
+          <div class="card">
+            <div class="card-body">
+              
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover" id="myTable">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Coupon Code</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Expiry Date</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {{#each response}}
+                  <tr>
+                    {{!-- <th scope="row"><input type="checkbox" /></th> --}}
+                    <td>1</td>
+                    <td class="tm-product-name">{{this.couponName}}</td>
+                    <td>{{this.Discount}}%</td>
+                    <td>{{this.ExpDate}}</td>
+                   
+                    
+                    <td>
+
+                      <button class="btn btn-outline-danger text-uppercase" onclick="DeleteCoupon('{{this._id}}')">
+                            Delete
+                        </button>
+                    </td>
+                  
+                    {{/each}}
+                   
+                </tbody>
+              </table>
+
+              
+              <!-- End Table with hoverable rows -->
+
+            </div>
+          </div>
+    </main>
+
+              </div><!-- End Pills Tabs -->
+
+            </div>
+          </div>
+
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+          <script>
+           
+
+           function DeleteCoupon(id){
+
+            swal({
+              title: "Are you sure?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+
+                
+                       $.ajax({
+                              url:'/admin/deleteCoupon',
+                              data:{
+                                  couponId:id,
+                              },
+                              method:'delete',
+                              success:(response)=>{
+
+
+                                 swal("Deleted Successfully", {
+                                      icon: "success",
+                                    });
+
+
+                                    location.reload()
+                          }
+                          }) 
+
+
+
+
+               
+              } else {
+                swal("Not Deleted");
+              }
+            });
+
+           }
+
+          </script>

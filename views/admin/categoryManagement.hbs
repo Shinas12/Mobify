@@ -1,0 +1,48 @@
+    <div id="main" class="row" style="justify-content: center; ">
+
+              {{#if errMessage}}
+                 <div style="text-align: center ;">
+                      <p class="text-danger">{{errMessage}}</p>
+                </div>    
+
+              {{/if}}
+
+               {{#if successMessage}}
+                  <div style="text-align: center ;">
+                      <p class="text-success">{{successMessage}}</p>
+                  </div>
+              {{/if}}
+
+            <div class="col-8">
+          
+               
+                       <h5 class="card-title">Add New Brand</h5>
+
+                       
+
+                    <form action="/admin/categoryadd" method="post" enctype="multipart/form-data" >
+
+    
+                        
+                        
+                        
+                            <input type="text" class="form-control item"  placeholder="Brand" name="Brand"> 
+
+                            <br>
+                       
+                            <input type="file" class="form-control item"   name="image" accept="image/jpg, image/jpeg, image/png, image/webp">
+                        
+                           <br>
+                          
+                          <button type="submit" class="btn btn-primary">Add</button>
+                        
+                     </form>
+                  
+
+
+                  
+
+            </div>
+
+
+    </div>

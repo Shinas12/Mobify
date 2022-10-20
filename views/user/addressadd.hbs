@@ -1,0 +1,37 @@
+
+
+   <div class="container mt-5 text-center">
+		 <div ><h5> Address You Booked</h5>	</div>
+  <div class="testimonial">
+  
+  
+	
+
+  {{#each adrs}}
+
+    <div class="card" id="add{{this._id.Address.Housename}}phn{{this._id.CustomerPhone}}name{{this._id.CustomerName}}" style="display: block;">
+      <div class="layer"></div>
+      <div class="content mt-3">
+
+
+        <p>{{this._id.CustomerName}}</p><br> 
+	    <p>{{this._id.Address.Housename}}</p><br>
+        <p>{{this._id.Address.LandMark}}</p><br>
+        <p>{{this._id.Address.Street}}</p><br>
+        <p>{{this._id.Address.City}}</p><br>
+        <p>{{this._id.Address.State}}</p><br>
+        <p>{{this._id.CustomerPhone}}</p><br><br><br>
+
+  <button class="btn btn-primary change" type="button" onclick="EditAddress('{{this._id.Address.Housename}}','{{this._id.Address.LandMark}}','{{this._id.CustomerPhone}}','{{this._id.CustomerName}}')"><span>Edit</span></button><br><br>
+
+
+	<button class="btn btn-primary change" type="button" onclick="deleteAddress('{{this._id.Address.Housename}}','{{this._id.Address.LandMark}}','{{this._id.CustomerPhone}}','{{this._id.CustomerName}}')"><span>Delete</span></button>
+       
+     </div>
+    </div> 
+
+	{{/each}}
+  </div>
+ </div> 
+
+ <script src="/javascripts/ajaxCountCall.js"></script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
+
+ 
+</head>
+
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+
+
+
+<section id="main">
+    <div class="container my-5">
+    <table class="table" id="myTable">
+  <thead>
+    <tr>
+      
+      <th scope="col"> Name</th>
+      <th scope="col">Mail</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Action</th>
+      
+    </tr>
+  </thead>
+
+
+  <tbody>
+
+    {{#each getUserInfomration}}
+    <tr>
+      
+      <td>{{this.name}}</td>
+      <td>{{this.email}}</td> 
+      <td>{{this.number}}</td>
+      <td>
+        {{#if this.signupstatus}}
+        <a href="/admin/block/{{this._id}}" class="btn btn-primary">Block</a>
+        {{else}}
+        <a href="/admin/unblock/{{this._id}}" class="btn btn-primary">Activate</a>
+        {{/if}}
+      </td>
+     
+
+      
+    </tr> 
+    {{/each}} 
+
+
+  </tbody>
+
+
+</table>
+</div>
+</section>
+
+
+
+
+
+   
+
+    
+
+  <script>
+
+ $(document).ready(function(){
+        $('#myTable').DataTable();
+    });
+
+</script>

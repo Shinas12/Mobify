@@ -1,0 +1,61 @@
+    <div id="main" class="row" style="justify-content: center; ">
+
+              {{#if errMessage}}
+                 <div style="text-align: center ;">
+                      <p class="text-danger">{{errMessage}}</p>
+                </div>    
+
+              {{/if}}
+
+               {{#if successMessage}}
+                  <div style="text-align: center ;">
+                      <p class="text-success">{{successMessage}}</p>
+                  </div>
+              {{/if}}
+
+            <div class="col-8">
+          
+               
+                       <h5 class="card-title">Edit Brand</h5>
+
+                       
+
+                    <form action="/admin/edit-brand" method="post" enctype="multipart/form-data" >
+
+    
+                        
+                        
+                        
+                            <input type="text" class="form-control item"  placeholder="Brand" name="Brand" value="{{catfind.Brand}}">
+                            <input type="text" class="form-control item"  name="id" value="{{catfind._id}}" hidden> 
+
+                            <br>
+
+                            <div>
+                                <img src="/images/product/{{catfind.img.[0]}}" alt="" srcset="" style="width: 50px;height: 43px;" id="imagechange">
+                            </div> <br>
+                       
+                            <input type="file" class="form-control item"   name="image" onchange="changeimage(event)" accept="image/jpg, image/jpeg, image/png, image/webp">
+                        
+                           <br>
+                          
+                          <button type="submit" class="btn btn-primary">Add</button>
+                        
+                     </form>
+                  
+
+
+                  
+
+            </div>
+
+
+    </div>
+
+    <script>
+        function changeimage(e){
+            console.log(e)
+            
+    }
+        
+    </script>

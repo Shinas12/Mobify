@@ -1,0 +1,93 @@
+<main id="main" class="main"> 
+
+     <a href="/admin/categoryManagement"><button type="button" class="btn btn-primary ">Add category</button></a><br><br><br>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">View Products</h5>
+
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover" id="myTable">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Brand Name</th>
+                    <th scope="col">Thumbnail</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each category}}
+                  <tr>
+                    {{!-- <th scope="row"><input type="checkbox" /></th> --}}
+                    <td>1</td>
+                    <td class="tm-product-name">{{this.Brand}}</td>
+                    <td><img src="/images/product/{{this.img.[0]}}" alt="" style="height: 50px; width: 60px;"></td>
+                   
+                    
+                    <td>
+                      <a href="/admin/edit-brand/?catId={{this._id}}"><button type="button" class="btn btn-outline-primary ">Edit</button></a>
+                      
+                      <button class="btn btn-outline-danger text-uppercase" onclick="alertMessage('{{this._id}}')">
+                            Delete
+                        </button>
+                    </td>
+                  
+                    
+                  {{/each}} 
+                </tbody>
+              </table>
+
+              
+              <!-- End Table with hoverable rows -->
+
+            </div>
+          </div>
+    </main>
+ 
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
+  <script>
+    function alertMessage(Id){
+     swal({
+              title: "Are you sure?",
+              text: "It will also delete the product",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+
+                
+                       $.ajax({
+                              url:'/admin/deleteCat',
+                              data:{
+                                  catId:Id,
+                              },
+                              method:'delete',
+                              success:(response)=>{
+
+
+                                 swal("Brand and Products has been deleted!", {
+                                      icon: "success",
+                                    });
+
+
+                                    location.reload()
+                          }
+                          }) 
+
+
+
+
+               
+              } else {
+                swal("Not Deleted");
+              }
+            });
+
+    }
+  </script>  
+
+   

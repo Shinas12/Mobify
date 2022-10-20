@@ -1,0 +1,172 @@
+
+    
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Easiest Way to Add Input Masks to Your Forms</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <link rel="stylesheet" href="stylesheets/style.css">
+
+
+
+</head>
+<body>
+    <div class="registration-form">
+       
+        <form method="post" action="/signup" onsubmit="return check()">
+
+        {{#if errMessage}}
+        <div class="text-center" style="color:lightsalmon ;">
+         <p style="color: red ;">{{errMessage}}</p>
+        </div>
+        {{/if}}
+        
+            <div class="form-icon">
+                <span><i class="icon icon-user"></i></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="Name" onkeyup="validateName()" placeholder="Username" name="name">
+                
+				<span id="name" class="text-danger"></span>
+               
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control item" id="password" onkeyup="validPassowrd()" placeholder="Password" name="password">
+               
+				<span id="passwords" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <input type="password" class="form-control item" id="cpassword"  placeholder="Confirm Password" >
+               
+				<span id="cpasswords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="Email" onkeyup="validEmail()" placeholder="Email" name="email">
+                
+				<span id="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="phonenumber" onkeyup="validPhoneumber()" placeholder="Phone Number" name="number">
+                 
+				<span id="phonenumbers" class="text-danger"></span>
+            </div>
+            {{!-- <div class="form-group">
+                <input type="text" class="form-control item" id="birth-date" placeholder="Birth Date">
+            </div> --}}
+            <div class="form-group">
+                <button type="submit" class="btn btn-block create-account ">Create Account</button>
+            </div>
+        </form>
+
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    
+</body>
+</html>
+
+ <script>
+    var errorName = document.getElementById('name')
+    var errorEmail = document.getElementById('email')
+    var errorPassword = document.getElementById('passwords')
+    var errorcPassword = document.getElementById('cpasswords')
+	var errorPhonenumber = document.getElementById('phonenumbers')
+    function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorName.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorName.innerHTML = 'enter a valid name'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+    }
+    function validEmail() {
+        const email = document.getElementById('Email').value
+        if (email == "") {
+            errorEmail.innerHTML = "enter you email address"
+            return false
+        }
+        if (!email.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            errorEmail.innerHTML = 'enter a proper email address'
+            return false
+        }
+        errorEmail.innerHTML = null
+        return true
+    }
+    function validPassowrd() {
+        const psd = document.getElementById('password').value
+        if (psd == "") {
+            errorPassword.innerHTML = "enter a password"
+            return false
+        }
+        if (psd.length < 5) {
+			
+            errorPassword.innerHTML = "password should be more than five characters"
+            return false
+        }
+        errorPassword.innerHTML = null
+        return true
+    }
+
+    function cPassowrd() {
+        const psd = document.getElementById('password').value
+        const cpsd = document.getElementById('cpassword').value
+        if (cpsd == "") {
+            errorcPassword.innerHTML = "enter a password"
+            return false
+        }
+        if (cpsd !== psd) {
+			
+            errorcPassword.innerHTML = "password is not matching"
+            return false
+        }
+        errorcPassword.innerHTML = null
+        return true
+    }
+
+	 function validPhoneumber() {
+        const mob = document.getElementById('phonenumber').value
+        if (mob == "") {
+            errorPhonenumber.innerHTML = "enter a phonenumber"
+            return false
+        }
+        if (mob.length < 10 || !mob.match(/^\d*$/)) {
+            errorPhonenumber.innerHTML = "Please Enter the valide phone number"
+            return false
+        }
+        errorPhonenumber.innerHTML = null
+        return true
+    }
+
+        function check(){
+              let validatearray =[!validateName() , !validEmail() , !validPassowrd() , !validPhoneumber() , !cPassowrd()]
+
+              return validatearray.every(validation)
+              
+
+        }
+
+  
+
+    function validation() {
+        if (!validateName() || !validEmail() || !validPassowrd() || !validPhoneumber() || !cPassowrd()) {
+            return false
+        }
+        return true
+    }
+</script>

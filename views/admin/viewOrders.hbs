@@ -1,0 +1,45 @@
+
+<div id="main">
+<div class="wrapper">
+
+  <div >
+    <div class="table">
+      <table>
+        <thead>
+          
+          <tr>
+            <td>Email</td>
+            <td>Name</td>
+           
+            <td>Paym method</td>
+            <td>Coupon</td>
+       
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+         {{#each allorders}} 
+          <tr>
+            <td>{{this.DeliveryDetails.CustomerEmail}}</td>
+            <td>{{this.DeliveryDetails.CustomerName}}</td>
+           
+            <td>{{this.CustomerPaymentMethod}}</td>
+            {{#if this.CouponApplied}}
+            <td>Coupon Applied</td>
+            {{else}}
+            <td>Coupon Not Applied</td>
+            {{/if}}
+            
+            <td>
+               <a href="/admin/detailedorderstatus/?orderid={{this._id}}"><button class="btn">More</button></a> 
+            </td>
+          </tr>
+         {{/each}}
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>

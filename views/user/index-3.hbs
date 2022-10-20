@@ -1,0 +1,398 @@
+
+
+<div class="page-wrapper" >
+
+
+
+
+
+
+
+
+
+
+
+
+    <main class="main">
+        <div class="intro-section pt-3 pb-3 mb-2">
+            <div class="container ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="row">
+                    <div class="col-lg-10" style="margin-left: 8%; margin-right: 8%;">
+                        <div class="intro-slider-container slider-container-ratio mb-2 mb-lg-0">
+                            <div class="intro-slider owl-carousel owl-simple owl-dark owl-nav-inside" data-toggle="owl"
+                                data-owl-options='{
+                                        "nav": false, 
+                                        "dots": true,
+                                        "responsive": {
+                                            "768": {
+                                                "nav": true,
+                                                "dots": false
+                                            }
+                                        }
+                                    }'>
+                                <div class="intro-slide">
+                                    <figure class="slide-image">
+                                        <picture>
+                                            <source media="(max-width: 480px)"
+                                                srcset="assets/images/demos/demo-3/slider/slide-1-480w.jpg">
+                                            <img src="assets/images/demos/demo-3/slider/slide-1.jpg" alt="Image Desc">
+                                        </picture>
+                                    </figure><!-- End .slide-image -->
+
+                                    <div class="intro-content">
+                                        <h3 class="intro-subtitle text-primary">Daily Deals</h3>
+                                        <!-- End .h3 intro-subtitle -->
+                                        <h1 class="intro-title">
+                                            AirPods <br>Earphones
+                                        </h1><!-- End .intro-title -->
+
+                                        <div class="intro-price">
+                                            <sup>Today:</sup>
+                                            <span class="text-primary">
+                                                $247<sup>.99</sup>
+                                            </span>
+                                        </div><!-- End .intro-price -->
+
+                                        <a href="category.html" class="btn btn-primary btn-round">
+                                            <span>Click Here</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </a>
+                                    </div><!-- End .intro-content -->
+                                </div><!-- End .intro-slide -->
+
+                                <div class="intro-slide">
+                                    <figure class="slide-image">
+                                        <picture>
+                                            <source media="(max-width: 480px)"
+                                                srcset="assets/images/demos/demo-3/slider/slide-2-480w.jpg">
+                                            <img src="assets/images/demos/demo-3/slider/slide-2.jpg" alt="Image Desc">
+                                        </picture>
+                                    </figure><!-- End .slide-image -->
+
+                                    <div class="intro-content">
+                                        <h3 class="intro-subtitle text-primary">Deals and Promotions</h3>
+                                        <!-- End .h3 intro-subtitle -->
+                                        <h1 class="intro-title">
+                                            Echo Dot <br>3rd Gen
+                                        </h1><!-- End .intro-title -->
+
+                                        <div class="intro-price">
+                                            <sup class="intro-old-price">$49,99</sup>
+                                            <span class="text-primary">
+                                                $29<sup>.99</sup>
+                                            </span>
+                                        </div><!-- End .intro-price -->
+
+                                        <a href="category.html" class="btn btn-primary btn-round">
+                                            <span>Click Here</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </a>
+                                    </div><!-- End .intro-content -->
+                                </div><!-- End .intro-slide -->
+                            </div><!-- End .intro-slider owl-carousel owl-simple -->
+
+                            <span class="slider-loader"></span><!-- End .slider-loader -->
+                        </div><!-- End .intro-slider-container -->
+                    </div><!-- End .col-lg-8 -->
+
+
+
+
+
+
+
+
+
+                </div><!-- End .row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div><!-- End .container -->
+        </div><!-- End .intro-section -->
+
+
+
+
+
+        <br><br>
+        <div class="container">
+
+            <div class="heading-left text-center">
+                <h2 class="title">Categories</h2><!-- End .title -->
+            </div><br>
+
+            <div class="row justify-content-center">
+
+
+
+                {{#each category}}
+
+                <div class="col-2  ">
+
+
+
+                    <a href="/categoryselect/?category={{this._id}}">
+                        <figurey>
+                            <div class="thumbnail ">
+                                <div>{{this.Brand}}</div>
+                                <img src="/images/product/{{this.img.[0]}}" style="width: 130px; height: 90px;"
+                                    alt="Banner">
+                            </div>
+
+                        </figurey>
+                    </a>
+
+
+                </div><!-- End .col-md-6 -->
+
+                {{/each}}
+
+
+            </div><!-- End .row -->
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="mb-7 mb-lg-11"></div><!-- End .mb-7 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="container top">
+            <div class="heading ">
+                <div class="heading-left text-center">
+                    <h2 class="title">Products</h2><!-- End .title -->
+                </div><!-- End .heading-left -->
+                <br>
+            </div><!-- End .heading -->
+
+
+
+            <div class="tab-content tab-content-carousel just-action-icons-sm">
+                <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel"
+                    aria-labelledby="top-all-link">
+                    <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                        data-owl-options='{
+                                "nav": true, 
+                                "dots": false,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1200": {
+                                        "items":5
+                                    }
+                                }
+                            }'>
+
+
+                        {{#each products}}
+
+                        <div class="product product-2">
+                            <figure class="product-media">
+
+                                <a href="/product/{{this._id}}">
+                                    <img src="/images/product/{{this.img.[0]}}" alt="Product image"
+                                        class="product-image">
+                                </a>
+
+
+
+                                
+                                    {{#ifGotoCart ../user ../CartItems this._id }}
+
+                                    <div class="product-action product-action-success">
+
+                                     <a href="/cartview" class="btn-product  " title="go to cart"><small> go to
+                                            cart</small></a>
+                                    </div>
+                                    {{else}}
+                                    <div class="product-action product-action-dark">
+                                     <a href="/cart/?orderId={{../this._id}}" class="btn-product " title="Add to cart"><small> add to cart</small></a>
+                                    </div>
+
+                                    {{/ifGotoCart}}
+                                   
+
+                              
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    {{this.catdetails.[0].Brand}}
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title">{{this.Description}}</h3>
+                                <!-- End .product-title -->
+                                <div class="product-price">
+                               {{#if this.BrandDetails.[0].offerApplied}}
+
+                                                  <div class="product-price" style="display: block;">
+                                                   <h5 class="product-price"><s>Rs:{{this.original}}</s>&nbsp;&nbsp;&nbsp;{{this.offerPercentage}}%off</h5>
+                                                   <div class="product-price" >
+                                                    Rs: {{this.price}}
+                                                   </div>
+                                                   
+
+                                                </div>
+
+
+                                              {{else}}
+
+                                                <div class="product-price">
+                                                    Rs:{{this.price}}
+                                                </div><!-- End .product-price -->
+
+
+
+                                                {{/if}}
+                                </div><!-- End .product-price -->
+
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                         {{/each}}
+
+
+
+
+
+
+
+
+
+                    </div><!-- End .owl-carousel -->
+                </div><!-- .End .tab-pane -->
+
+
+
+
+
+            </div><!-- End .tab-content -->
+        </div><!-- End .container --> <br><br> <br><br>
+
+
+
+
+
+
+        <div class="container">
+            <hr class="mt-5 mb-0">
+        </div><!-- End .container -->
+
+        <div class="icon-boxes-container mt-2 mb-2 bg-transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                            <span class="icon-box-icon text-dark">
+                                <i class="icon-rocket"></i>
+                            </span>
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                                <p>Orders $50 or more</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                            <span class="icon-box-icon text-dark">
+                                <i class="icon-rotate-left"></i>
+                            </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                                <p>Within 30 days</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                            <span class="icon-box-icon text-dark">
+                                <i class="icon-info-circle"></i>
+                            </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
+                                <p>when you sign up</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                            <span class="icon-box-icon text-dark">
+                                <i class="icon-life-ring"></i>
+                            </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                                <p>24/7 amazing services</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .icon-boxes-container -->
+
+
+    </main><!-- End .main -->
+
+
+
+</div>
+
+
+

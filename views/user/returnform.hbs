@@ -1,0 +1,83 @@
+{{#each orderdetails}}
+                 <div class="container">
+                	<h2 class="title text-center mb-2">Return Product<h2><!-- End .title text-center mb-2 -->
+                	
+
+                    <div class="row" >
+                    	
+                            <div class="col-4">
+                        	
+                        			
+                        				<img src="/images/product/{{this.prodetail.img.[0]}}" style="width: 100px;height: 100px;" alt="item">
+                                        <hr>
+                        			     <h6> <strong>Name:</strong>           <small>    {{this.prodetail.productname}}    </small>   </h6>
+                                         <h6> <strong> Date of Order:</strong> <small>    {{this.date}}                     </small>   </h6>
+                                         <h6> <strong>Price:</strong>         <small>    {{this.prodetail.price}}          </small>   </h6>
+                                         <h6> <strong>No of Qty:</strong>     <small>    {{this.product.quantity}}         </small>   </h6>
+                                         <h6> <strong>Total Price:</strong>   <small>    {{this.GrandTotal}}               </small>   </h6>
+                                        
+                        		
+                        		
+
+                        			
+                        	</div>
+
+                            <div class="col-8">
+                         <form action="/userorderStatus" method="post" onsubmit="return validation()">
+                              <div>
+                            
+                           <input type="text"  class="form-control form-control-rounded" style="height: 200px;" name="reason" id="Name">
+                           <p id="name" style="color:#FCB941 ;"></p>
+                            <input type="text"  class="form-control form-control-rounded" name="orderId" value="{{this._id}}" hidden>
+                             <input type="text"  class="form-control form-control-rounded" name="proId" value="{{this.product.item}}"  hidden>
+                              <input type="text"  class="form-control form-control-rounded" name="Ship" value="Return-Requested" hidden>
+                              </div>
+                            <div>
+                                <button class="btn btn-outline-primary" type="submit">Submit</button>
+                            </div>
+                         </form>               
+
+                            </div>
+                     </div><!-- End .portfolio -->
+                    
+
+                    	
+
+
+
+
+
+
+                    </div><!-- End .portfolio-container -->
+                </div><!-- End .container-fluid -->
+{{/each}}
+
+<script>
+    var errorName = document.getElementById('name')
+   
+    function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Please enter a valid reason'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            errorName.innerHTML = 'Number are not allowed'
+            return false
+        }
+         if (name.match(/^[ ]*$/)) {
+            errorName.innerHTML = 'Please enter a valid reason'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+    }
+    
+
+    function validation() {
+        if (!validateName()) {
+            return false
+        }
+        return true
+    }
+</script>

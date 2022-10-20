@@ -1,0 +1,63 @@
+
+<div id="main">
+  {{#each returndetails}}
+<div class="box one">
+  <br>
+  <div class="row">
+    <div class="col-3">  
+
+      <h3>Product</h3> <br>
+          <img src="/images/product/{{this.Prodetails.img.[0]}}" style="width:100px ; height: 100px;" alt="">
+           <hr>
+       <h6> <strong>Name:</strong>           <small>    {{this.Prodetails.productname}}                </small>   </h6>
+       <h6> <strong>Price:</strong>         <small>    {{this.Prodetails.price}}                     </small>   </h6>
+       <h6>  <strong>No of Qty:</strong>     <small>    {{this.orderdetails.product.quantity}}         </small>   </h6>
+       <h6>  <strong>Total Price:</strong>   <small>    {{this.orderdetails.GrandTotal}}               </small>   </h6>
+    </div>
+    <div class="col-3">
+      <h3>User</h3> <br>
+       <h6>  <strong>Name:</strong>          <small>    {{this.userDetails.name}}                </small>   </h6>
+       <h6> <strong>Email</strong>     <small>    {{this.userDetails.email}}                     </small>   </h6>
+       <h6>  <strong>Phone:</strong>          <small>    {{this.userDetails.number}}                      </small>   </h6>
+       
+    </div>
+    <div class="col-3">
+            <h3>Booked Address</h3> <br>
+
+
+       <h6> <strong>Name:</strong>           <small>    {{this.orderdetails.DeliveryDetails.CustomerName}}                </small>   </h6>
+       <h6> <strong>Email:</strong>         <small>    {{this.orderdetails.DeliveryDetails.CustomerEmail}}                     </small>   </h6>
+       <h6>  <strong>Phone:</strong>     <small>    {{this.orderdetails.DeliveryDetails.CustomerPhone}}         </small>   </h6>
+       <h6> <strong>HouseName:</strong>           <small>    {{this.orderdetails.DeliveryDetails.Address.Housename}}                </small>   </h6>
+       <h6> <strong>LandMark:</strong>         <small>    {{this.orderdetails.DeliveryDetails.Address.LandMark}}                     </small>   </h6>
+       <h6>  <strong>Pincode:</strong>     <small>    {{this.orderdetails.DeliveryDetails.Address.Pincode}}         </small>   </h6>
+       <h6> <strong>Street:</strong>           <small>    {{this.orderdetails.DeliveryDetails.Address.Street}}                </small>   </h6>
+       <h6> <strong>City:</strong>         <small>    {{this.orderdetails.DeliveryDetails.Address.City}}                     </small>   </h6>
+       <h6>  <strong>State:</strong>     <small>    {{this.orderdetails.DeliveryDetails.Address.State}}         </small>   </h6>
+                     
+    </div>
+
+        <div class="col-3">
+            <h3>Reason</h3> <br>
+       <h6>  <strong>Reason :</strong>     <small>    {{this.reason}}         </small>   </h6><br><br><br>
+       <form action="/admin/returnconfirmed" method="post">
+            <input type="text" name="orderId" value="{{this.orderdetails._id}}" hidden>
+            <input type="text" name="proId" value="{{this.Prodetails._id}}" hidden>
+            
+            <input type="text" name="Ship" value="Return-Approved" hidden>
+           {{#if this.boolean}}
+
+          <button type="submit" class="btn btn-primary" >Approve Return</button>
+
+          {{else}} 
+
+          <h4 class="badge bg-success">Return Approved</h4>
+          
+          {{/if}}
+      </form>            
+    </div>
+    </div>
+</div><br><br><br>
+
+  {{/each}}
+  </div>

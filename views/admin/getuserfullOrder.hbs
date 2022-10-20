@@ -1,0 +1,54 @@
+<div id="main">
+
+    {{#each orderdetails}}
+
+    
+
+<div class="table" onclick="specificorder('{{this._id}}','{{this.product.item}}')">
+  
+
+  {{#if this.CouponApplied}}
+ <button class="btn btn-success">Coupon Applied</button>
+ {{else}}
+<button class="btn btn-info">Coupon Not Applied</button>
+    {{/if}}
+    
+  
+  <div class="block text-center">
+
+    <h5>product Image</h5>
+ 
+ <img src="/images/product/{{this.prodetails.img.[0]}}" alt="" srcset="" style="width: 130px;height:140px ;">
+  
+</div>
+<div class="block">
+
+    <h5 class="text-center">Quantity</h5>
+
+    <p class="text-center">{{this.product.quantity}}</p>
+
+</div>
+<div class="block">
+
+    <h5 class="text-center">order Date</h5>
+<p class="text-center">{{this.date}}</p>
+
+</div>
+<div class="block">
+
+    <h5 class="text-center">order Status</h5>
+<p class="text-center">{{this.product.shipping}}</p>
+
+</div>
+
+
+
+
+</div>
+
+{{/each}}
+
+
+</div>
+
+<script src="/javascripts/ajaxCountCall.js"></script>

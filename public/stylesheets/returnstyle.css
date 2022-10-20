@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+body {
+  background:white;
+  font-family: "Roboto", sans-serif;
+}
+
+h2 {
+  color: #5566F2;
+  letter-spacing: 1.7px;
+}
+
+.container {
+  display: flex;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  height: auto;
+  color:black;
+}
+
+
+
+.one:before, .one:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #5566F2;
+  transition: 0.4s all ease;
+}
+.one:before {
+  top: 0;
+}
+.one:after {
+  bottom: 0;
+}
+.one .item:before, .one .item:after {
+  position: absolute;
+  top: 0;
+  content: "";
+  height: 100%;
+  width: 2px;
+  background: #5566F2;
+  transition: 0.4s all ease;
+  z-index: -1;
+}
+.one .item:before {
+  left: 0;
+}
+.one .item:after {
+  right: 0;
+}
+.one:hover:before, .one:hover:after {
+  transition: 0.4s all ease;
+}
+.one:hover:before {
+  transform: translateY(-10px);
+}
+.one:hover:after {
+  transform: translateY(10px);
+}
+.one:hover .item {
+  color: white;
+}
+.one:hover .item:before, .one:hover .item:after {
+  width: 100%;
+  transition: 0.4s all ease;
+}
+
+ 

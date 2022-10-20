@@ -1,0 +1,134 @@
+
+
+
+    <div class="page-wrapper">
+
+
+        <main class="main">
+        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        		<div class="container">
+        			<h1 class="page-title">My Account</h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+
+            </nav><!-- End .breadcrumb-nav -->
+
+                      <div class="container">
+
+                    <div class="cta cta-separator bg-image mb-5" >
+	                	<div class="row">
+	                		<div class="col-lg-6">
+		            			<div class="cta-wrapper cta-text text-center">
+		            				<h3 class="cta-title">User Details</h3><!-- End .cta-title -->
+
+							
+									<a href="/userEdit" class="btn btn-primary btn-rounded"><span>Edit</span><i class="icon-long-arrow-right"></i></a>
+		            			</div><!-- End .cta-wrapper -->
+	                		</div><!-- End .col-lg-6 -->
+
+                            <div class="col-lg-6">
+		            			<div class="cta-wrapper cta-text text-center">
+		            				<h3 class="cta-title">My Orders</h3><!-- End .cta-title -->
+
+							
+									<a href="/orderDetails" class="btn btn-primary btn-rounded"><span>See Orders</span><i class="icon-long-arrow-right"></i></a>
+		            			</div><!-- End .cta-wrapper -->
+	                		</div><!-- End .col-lg-6 -->
+
+	                		
+	                	</div><!-- End .row -->
+                	</div><!-- End .cta -->
+
+                    <div class="cta cta-separator bg-image mb-5" >
+	                	<div class="row">
+	                		<div class="col-lg-6">
+		            			<div class="cta-wrapper cta-text text-center">
+		            				<h3 class="cta-title">My Wishlist</h3><!-- End .cta-title -->
+
+							
+									<a href="/wishlistView" class="btn btn-primary btn-rounded"><span>Click Here</span><i class="icon-long-arrow-right"></i></a>
+		            			</div><!-- End .cta-wrapper -->
+	                		</div><!-- End .col-lg-6 -->
+
+                            <div class="col-lg-6">
+		            			<div class="cta-wrapper cta-text text-center">
+		            				<h3 class="cta-title">Change Password</h3><!-- End .cta-title -->
+
+							
+									<a href="/changepassword" class="btn btn-primary btn-rounded"><span>Change</span><i class="icon-long-arrow-right"></i></a>
+		            			</div><!-- End .cta-wrapper -->
+	                		</div><!-- End .col-lg-6 -->
+
+	                		
+	                	</div><!-- End .row -->
+                	</div><!-- End .cta -->
+  
+              <div class="row text-center">
+                    <div class="col-6 col-lg-4 col-xl-2 "  >
+		                	<div class="btn-wrap">
+		                		<a href="/logout" class="btn btn-primary btn-round">Logout</a>
+		                	</div><!-- End .btn-wrap -->
+		                </div><!-- End .col-md-4 col-lg-2 -->
+
+             </div>
+
+             <div class="row text-center">
+                    <div class="col-6 col-lg-4 col-xl-2 "  >
+		                	<div class="btn-wrap">
+		                		<button onclick="DeleteAccount()" class="btn btn-primary btn-round">Delete Account</button>
+		                	</div><!-- End .btn-wrap -->
+		                </div><!-- End .col-md-4 col-lg-2 -->
+
+             </div>
+             </div>
+
+
+        </main><!-- End .main -->
+
+
+
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
+  <script>
+    function DeleteAccount(){
+     swal({
+              title: "Are you sure?",
+              text: "Once Deleted, Cant recover",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+
+                
+                       $.ajax({
+                              url:'/deleteAccount',
+                              method:'delete',
+                              success:(response)=>{
+
+
+                                 swal("Account deleted successfully", {
+                                      icon: "success",
+                                    });
+
+
+                                    location.href = '/'
+                          }
+                          }) 
+
+
+
+
+               
+              } else {
+                swal("Not Deleted");
+              }
+            });
+
+    }
+  </script>  
