@@ -4,6 +4,7 @@ var objectId=require('mongodb').ObjectId
 var userHelper=require('../helpers/login-helper');
 var LoginHelper= require('../helpers/user-helpers')
 const paypal = require('paypal-rest-sdk');
+const { ObjectId } = require('mongodb');
 
 require('dotenv').config()
 
@@ -33,7 +34,7 @@ let userLoggedIn
 let errMessage1
 let loginUser
 let query
-let cat
+
 let sPro
 
 
@@ -408,33 +409,37 @@ router.get('/category',paginatedResults,GotoCart,findAllWishlist,function(req, r
 //==============================================================================================================
 //User ProductDetails router
 
-router.get('/product/:id', function(req, res, next) {
-    id = req.params.id
-    res.redirect('/productview')
-});
 
-router.get('/productview',GotoCart,findAllWishlist,function(req, res, next) {
 
-  if(req.session.userLoggedIn){
+router.get('/product/:id',GotoCart,findAllWishlist,function(req, res, next) {
+  
+   if(ObjectId.isValid(req.params.id)){
 
-  LoginHelper.ProductView(id).then((product)=>{
-    LoginHelper.getcartcount(req.session.user._id).then((number)=>{
-      let CartItems = res.CartItems
-      let user = req.session.user._id
-      let Wish = res.Wishlist
-  res.render('user/product',{Header:true,homePage:false,userLoggedIn,product,number,CartItems,user,Wish})
+    if(req.session.userLoggedIn){
+
+      LoginHelper.ProductView(req.params.id).then((product)=>{
+        LoginHelper.getcartcount(req.session.user._id).then((number)=>{
+          let CartItems = res.CartItems
+          let user = req.session.user._id
+          let Wish = res.Wishlist
+      res.render('user/product',{Header:true,homePage:false,userLoggedIn,product,number,CartItems,user,Wish})
+        })
     })
-})
-
-  }else{
-
-    LoginHelper.ProductView(id).then((product)=>{  
-      let CartItems = res.CartItems 
-      let Wish = res.Wishlist
-    res.render('user/product',{Header:true,homePage:false,userLoggedIn,product,CartItems,Wish})
-      })
-
-  }
+    
+      }else{
+    
+        LoginHelper.ProductView(req.params.id).then((product)=>{  
+          let CartItems = res.CartItems 
+          let Wish = res.Wishlist
+        res.render('user/product',{Header:true,homePage:false,userLoggedIn,product,CartItems,Wish})
+          })
+    
+      }
+   
+   }else{
+    res.redirect('/*')
+   }
+  
 });
 
 
@@ -451,11 +456,17 @@ router.get('/productview',GotoCart,findAllWishlist,function(req, res, next) {
 //===============================================================================================================
 //user cart handle router
 router.get('/cart',verify,(req,res)=>{
-  console.log(req.query)
-  id=req.query.orderId
-  LoginHelper.Addtocart(id,req.session.user._id).then((response)=>{
-    res.redirect('/cartview')
-  })
+  
+  if(Object.isValid(req.query.orderId)){
+
+    LoginHelper.Addtocart(req.query.orderId,req.session.user._id).then((response)=>{
+      res.redirect('/cartview')
+    })
+
+  }else{
+    res.redirect('/*')
+  }
+  
   
 })
 
@@ -778,12 +789,8 @@ router.post('/productIncrement',(req,res)=>{
 //Wish list router
 
 router.get('/wishlist',verify,(req,res)=>{
-  
-  
-   id = req.query.id 
-   console.log("id print")
-   console.log(id)
-   LoginHelper.Wishlist(id,req.session.user._id).then((response)=>{
+
+   LoginHelper.Wishlist(req.query.id,req.session.user._id).then((response)=>{
    res.json(response)
 })
 }) 
@@ -791,22 +798,25 @@ router.get('/wishlist',verify,(req,res)=>{
 
 router.get('/wishlistView',verify,(req,res)=>{
  LoginHelper.wishlistdeatis(req.session.user._id).then((response)=>{
-  console.log(response)
+  
   res.render('user/wishlist',{Header:true,homePage:false,userLoggedIn,response})
  })
 
 })
 
-router.get('/wishlistremove',verify,(req,res)=>{
-   id = req.query.proId
-   res.redirect('/wishlistremoved') 
-})
 
-router.get('/wishlistremoved',verify,(req,res)=>{
+
+router.get('/wishlistremove',verify,(req,res)=>{
+
+  if(ObjectId.isValid(req.query.proId)){
+    LoginHelper.Wishlistremove(req.query.proId,req.session.user._id).then((response)=>{
+      res.redirect('/wishlistView') 
+    }) 
+  }else{
+    res.redirect("/*")
+  }
   
-  LoginHelper.Wishlistremove(id,req.session.user._id).then((response)=>{
-    res.redirect('/wishlistView') 
-  }) 
+  
 })
 //======================================================================================================================
 
@@ -838,31 +848,35 @@ router.get('/myaccount',verify,(req,res)=>{
 //==========================================================================================================================
 //select category router  
 
+
+
 router.get('/categoryselect',(req,res)=>{
-   cat = req.query.category
-  res.redirect('/categoryselects')
-})
+  if(ObjectId.isValid(req.query.category)){
 
-router.get('/categoryselects',(req,res)=>{
-  if(req.session.userLoggedIn){
+    if(req.session.userLoggedIn){
 
-    LoginHelper.getCatProductnfo(cat).then((products)=>{
-      LoginHelper.getcartcount(req.session.user._id).then((number)=>{
-        LoginHelper.addCategory().then((category)=>{    
-          res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,number,category})
+      LoginHelper.getCatProductnfo(req.query.category).then((products)=>{
+        LoginHelper.getcartcount(req.session.user._id).then((number)=>{
+          LoginHelper.addCategory().then((category)=>{    
+            res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,number,category})
+          })
+     
+         
         })
-   
-       
-      })
-  })
-    }else{
-      LoginHelper.getCatProductnfo(cat).then((products)=>{ 
-        LoginHelper.addCategory().then((category)=>{
-      res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,category})
-        })
-      
     })
-    } 
+      }else{
+        LoginHelper.getCatProductnfo(req.query.category).then((products)=>{ 
+          LoginHelper.addCategory().then((category)=>{
+        res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,category})
+          })
+        
+      })
+      } 
+
+  }else{
+     res.redirect("/*")
+  }
+  
 })
 
 
@@ -1084,7 +1098,7 @@ paypal.payment.create(create_payment_json, function (error, payment) {
 router.get('/success',verify, (req, res) => {
 
  
-  console.log(req.query)
+ 
   let ordrId =req.query.orderID
  
  
@@ -1165,7 +1179,7 @@ router.get('/deleteCoupon',verify,(req,res)=>{
 //=====================================================================================================
 //search router
 router.get('/search',(req,res)=>{
-  console.log(req.query.search)
+  
   LoginHelper.searchProduct(req.query.search).then((searchedProducts)=>{
     res.json("its calling")
   })
