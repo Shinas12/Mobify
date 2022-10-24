@@ -369,6 +369,7 @@ router.get('/category',paginatedResults,GotoCart,findAllWishlist,function(req, r
       })
  
      
+      
     })
 
   }else{
