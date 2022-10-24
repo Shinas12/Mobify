@@ -30,12 +30,11 @@ var client = require('twilio')(accountSID,authToken)
 /* GET home page. */
 
 let errMessage
-let userLoggedIn
 let errMessage1
-let loginUser
-let query
 
-let sPro
+
+
+
 
 
 
@@ -137,7 +136,7 @@ router.get('/',GotoCart, function(req, res, next) {
         let CartItems = res.CartItems
         let user = req.session.user._id
        
-        res.render('user/index-3',{Header:true,homePage:true,userLoggedIn,number,category,cathover:true,sPro,products,CartItems,user})
+        res.render('user/index-3',{Header:true,homePage:true,userLoggedIn:req.session.userLoggedOut,number,category,cathover:true,products,CartItems,user})
        
        
       })  
@@ -151,7 +150,7 @@ router.get('/',GotoCart, function(req, res, next) {
         
         let CartItems = res.CartItems
        
-        res.render('user/index-3',{Header:true,homePage:true,userLoggedIn,category,cathover:true,sPro,products,CartItems})
+        res.render('user/index-3',{Header:true,homePage:true,category,cathover:true,products,CartItems})
         
       
       })
@@ -198,8 +197,8 @@ router.post('/signup', function(req, res, next) {
         LoginHelper.getSingleUserInfo(response.id).then((user)=>{
           req.session.userLoggedIn=true
           req.session.user=user
-          userLoggedIn=false
-          loginUser = true
+          req.session.userLoggedOut=false
+         
         res.redirect('/login')
         })
         
@@ -238,8 +237,8 @@ router.post('/login', function(req, res, next) {
     if(response.status){
       req.session.userLoggedIn=true
       req.session.user=response.user
-      userLoggedIn=false
-      loginUser = true
+      req.session.userLoggedOut=false
+      
       res.redirect('/')
     }else{
       errMessage=response.errMessage
@@ -309,8 +308,8 @@ router.post('/otplast',((req,res)=>{
      let otpuser = await  userHelper.doOtplogin(mob)
      req.session.user=otpuser
       req.session.userLoggedIn=true
-      userLoggedIn=false
-      loginUser=true
+      req.session.userLoggedOut=false
+     
       res.redirect('/')
     }else{
       errMessage="OTP is not matching"
@@ -366,7 +365,7 @@ router.get('/category',paginatedResults,GotoCart,findAllWishlist,function(req, r
   
     LoginHelper.getcartcount(user).then((number)=>{
       LoginHelper.addCategory().then((category)=>{    
-        res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,number,category,next,previous,pages,pageCount,currentPage,CartItems,user,Wish})
+        res.render('user/category',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,products,number,category,next,previous,pages,pageCount,currentPage,CartItems,user,Wish})
       })
  
      
@@ -385,7 +384,7 @@ router.get('/category',paginatedResults,GotoCart,findAllWishlist,function(req, r
   
    
       LoginHelper.addCategory().then((category)=>{
-    res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,category,next,previous,pages,pageCount,currentPage,CartItems,Wish})
+    res.render('user/category',{Header:true,homePage:false,products,category,next,previous,pages,pageCount,currentPage,CartItems,Wish})
       })
     
  
@@ -422,7 +421,7 @@ router.get('/product/:id',GotoCart,findAllWishlist,function(req, res, next) {
           let CartItems = res.CartItems
           let user = req.session.user._id
           let Wish = res.Wishlist
-      res.render('user/product',{Header:true,homePage:false,userLoggedIn,product,number,CartItems,user,Wish})
+      res.render('user/product',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,product,number,CartItems,user,Wish})
         })
     })
     
@@ -431,7 +430,7 @@ router.get('/product/:id',GotoCart,findAllWishlist,function(req, res, next) {
         LoginHelper.ProductView(req.params.id).then((product)=>{  
           let CartItems = res.CartItems 
           let Wish = res.Wishlist
-        res.render('user/product',{Header:true,homePage:false,userLoggedIn,product,CartItems,Wish})
+        res.render('user/product',{Header:true,homePage:false,product,CartItems,Wish})
           })
     
       }
@@ -477,15 +476,15 @@ router.get('/cartview',verify,(req,res)=>{
       let total = totalValue[0].grandtotal
       LoginHelper.ViewCartDiscount(req.session.user._id,total).then((discount)=>{
         if(discount[0]){
-          res.render('user/cart',{Header:true,homePage:false,userLoggedIn,product,total,discount})
+          res.render('user/cart',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,product,total,discount})
         }else{
-          res.render('user/cart',{Header:true,homePage:false,userLoggedIn,product,total})
+          res.render('user/cart',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,product,total})
         }
         
       })
       
     }else{
-      res.render('user/cart',{Header:true,homePage:false,userLoggedIn,product})
+      res.render('user/cart',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,product})
     }
     
    
@@ -525,7 +524,7 @@ router.get('/checkout',verify,(req,res)=>{
 
                 LoginHelper.getAddress(req.session.user._id).then((adrs)=>{
                   LoginHelper.getMoreAddress(req.session.user._id).then((adrsMore)=>{
-                    res.render('user/checkout',{Header:true,homePage:false,userLoggedIn,product,discount,total,user:req.session.user,adrs,AcaStyle:true,adrsMore})
+                    res.render('user/checkout',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,product,discount,total,user:req.session.user,adrs,AcaStyle:true,adrsMore})
                   })
               
                 })
@@ -534,7 +533,7 @@ router.get('/checkout',verify,(req,res)=>{
 
                 LoginHelper.getAddress(req.session.user._id).then((adrs)=>{
                   LoginHelper.getMoreAddress(req.session.user._id).then((adrsMore)=>{
-                    res.render('user/checkout',{Header:true,homePage:false,userLoggedIn,product,total,user:req.session.user,adrs,AcaStyle:true,adrsMore})
+                    res.render('user/checkout',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,product,total,user:req.session.user,adrs,AcaStyle:true,adrsMore})
                   })
               
                 })
@@ -730,9 +729,9 @@ router.get('/orderDetails',verify,(req,res)=>{
        
         let OgrandTot  = ordergrandTotal[0].grandtotal
     
-        res.render('user/order',{Header:true,homePage:false,userLoggedIn,orderDetails,OgrandTot})
+        res.render('user/order',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,orderDetails,OgrandTot})
       }else{
-        res.render('user/order',{Header:true,homePage:false,userLoggedIn,orderDetails})
+        res.render('user/order',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,orderDetails})
       }
       
       
@@ -752,7 +751,7 @@ router.get('/returnProduct',verify,(req,res)=>{
 router.get('/returnProductagain',verify,(req,res)=>{
   LoginHelper.specificproductdetails(req.session.return).then((orderdetails)=>{
    
-    res.render('user/returnform',{Header:true,homePage:false,userLoggedIn,orderdetails})
+    res.render('user/returnform',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,orderdetails})
   })
 })
 
@@ -799,7 +798,7 @@ router.get('/wishlist',verify,(req,res)=>{
 router.get('/wishlistView',verify,(req,res)=>{
  LoginHelper.wishlistdeatis(req.session.user._id).then((response)=>{
   
-  res.render('user/wishlist',{Header:true,homePage:false,userLoggedIn,response})
+  res.render('user/wishlist',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,response})
  })
 
 })
@@ -834,7 +833,7 @@ router.get('/wishlistremove',verify,(req,res)=>{
 //user my account router
 router.get('/myaccount',verify,(req,res)=>{
 
-  res.render('user/myaccount',{Header:true,homePage:false,userLoggedIn})
+  res.render('user/myaccount',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut})
 })
 //=====================================================================================================================
 
@@ -858,7 +857,7 @@ router.get('/categoryselect',(req,res)=>{
       LoginHelper.getCatProductnfo(req.query.category).then((products)=>{
         LoginHelper.getcartcount(req.session.user._id).then((number)=>{
           LoginHelper.addCategory().then((category)=>{    
-            res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,number,category})
+            res.render('user/category',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,products,number,category})
           })
      
          
@@ -867,7 +866,7 @@ router.get('/categoryselect',(req,res)=>{
       }else{
         LoginHelper.getCatProductnfo(req.query.category).then((products)=>{ 
           LoginHelper.addCategory().then((category)=>{
-        res.render('user/category',{Header:true,homePage:false,userLoggedIn,products,category})
+        res.render('user/category',{Header:true,homePage:false,products,category})
           })
         
       })
@@ -894,7 +893,7 @@ router.get('/categoryselect',(req,res)=>{
 //=======================================================================================================================
 //user password Change router
 router.get('/changepassword',verify,(req,res)=>{
-  res.render('user/changepassword',{Header:true,homePage:false,userLoggedIn,errMessage})
+  res.render('user/changepassword',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,errMessage})
   errMessage = ""
 })
 
@@ -926,7 +925,7 @@ router.post('/changepassword',(req,res)=>{
 router.get('/userEdit',verify,(req,res)=>{
   LoginHelper.getUserInfoforEdit(req.session.user._id).then((user)=>{
     console.log(user)
-    res.render('user/userEdit',{Header:true,homePage:false,userLoggedIn,errMessage,user})
+    res.render('user/userEdit',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,errMessage,user})
     errMessage=""
   })
  
@@ -960,7 +959,7 @@ router.post('/saveChanges',(req,res)=>{
 //===============================================================================================================================
 //user address router
 router.get('/addressadd',(req,res)=>{
-  res.render('user/addressadd',{Header:true,homePage:false,userLoggedIn})
+  res.render('user/addressadd',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut})
 })
 
 
@@ -977,7 +976,7 @@ router.post('/filladdress',(req,res)=>{
 
 router.get('/addressManagement',verify,(req,res)=>{
   LoginHelper.getMoreAddress(req.session.user._id).then((adrs)=>{
-  res.render('user/addressadd',{Header:true,homePage:false,userLoggedIn,adrs,AddrssStyle:true})
+  res.render('user/addressadd',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,adrs,AddrssStyle:true})
   })
 })
 
@@ -1014,7 +1013,7 @@ router.get('/EditAddressPage',verify,(req,res)=>{
 router.get('/EditAddressPages',verify,(req,res)=>{
   LoginHelper.addressfind(req.session.addressid).then((addrss)=>{
     req.session.addrsfordeleteafteredit = addrss
-    res.render('user/EditaddressPage',{Header:true,homePage:false,userLoggedIn,addrss})
+    res.render('user/EditaddressPage',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,addrss})
    })
 })
 
@@ -1210,7 +1209,7 @@ router.post('/getProductDetails',(req,res)=>{
 
 router.post('/filteredProduct',findAllWishlist,GotoCart,(req,res)=>{
 
-  console.log(req.body)
+  
  
 
  
@@ -1240,7 +1239,7 @@ router.post('/filteredProduct',findAllWishlist,GotoCart,(req,res)=>{
             if(filteredProduct == true){
                 res.redirect('/category')
             }else{
-              res.render('user/filteredProduct',{Header:true,homePage:false,userLoggedIn,number,category,CartItems,user,Wish,filteredProduct})
+              res.render('user/filteredProduct',{Header:true,homePage:false,userLoggedIn:req.session.userLoggedOut,number,category,CartItems,user,Wish,filteredProduct})
             }
           
         })
@@ -1266,7 +1265,7 @@ router.post('/filteredProduct',findAllWishlist,GotoCart,(req,res)=>{
             if(filteredProduct == true){
               res.redirect('/category')
             }else{
-              res.render('user/filteredProduct',{Header:true,homePage:false,userLoggedIn,category,CartItems,Wish,filteredProduct})
+              res.render('user/filteredProduct',{Header:true,homePage:false,category,CartItems,Wish,filteredProduct})
             }
 
         })
@@ -1289,8 +1288,8 @@ router.post('/filteredProduct',findAllWishlist,GotoCart,(req,res)=>{
 
 router.get('/logout', function(req, res, next) {
   req.session.userLoggedIn=false
-  userLoggedIn=true
-  loginUser = false
+  req.session.userLoggedOut=true
+  
   res.redirect('/')
 });
 
@@ -1309,8 +1308,8 @@ router.get('/logout', function(req, res, next) {
   LoginHelper.deleteAccount(req.session.user._id).then((response)=>{
   
     req.session.userLoggedIn=false
-    userLoggedIn=true
-    loginUser = false
+    req.session.userLoggedOut=true
+   
     res.json(response)
   })
 
