@@ -198,7 +198,7 @@ router.post('/signup', function(req, res, next) {
         LoginHelper.getSingleUserInfo(response.id).then((user)=>{
           req.session.userLoggedIn=true
           req.session.user=user
-          req.session.userLoggedIn=false
+         
          
         res.redirect('/login')
         })
