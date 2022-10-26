@@ -2902,7 +2902,7 @@ filteredProducts:(filter)=>{
         arrayfilter = Object.values(filter)
     }
 
-    console.log(arrayfilter)
+   
     if(arrayfilter[0]){
 
 

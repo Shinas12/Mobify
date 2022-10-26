@@ -257,11 +257,7 @@ router.post('/addproduct',upload.array('image'),(req,res)=>{
 
   const files = req.files
 
-  const file = files.map((file)=>{
-      return file
-  })
- 
-  const fileName = file.map((file)=>{
+  const fileName = files.map((file)=>{
       return file.filename
   })
   const product = req.body

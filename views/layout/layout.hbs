@@ -152,17 +152,10 @@
 
     {{#if Header}}
 
-   
-
-            {{#if userLoggedIn}}
+      
             
-                    {{>UserLoginHeader}}
-
-            {{else}}
-        
-                    {{>UserLogoutHeader}}
-          
-            {{/if}}
+                    {{>UserHeader}}
+       
 
      {{else}}
 
@@ -254,12 +247,12 @@
                         <a href="/category/?page=1" class="sf-with-ul">Product</a>
                        
                     </li>
-                    {{#unless userLoggedIn}}
+                    {{#if userLoggedIn}}
 
                     <li>
                          <a href="/myaccount" >MY ACCOUNT</a>
                     </li>
-                    {{/unless}}
+                    {{/if}}
 
                 </ul>
             </nav><!-- End .mobile-nav -->

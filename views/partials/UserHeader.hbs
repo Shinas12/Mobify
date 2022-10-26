@@ -15,7 +15,7 @@
                             <i class="icon-bars"></i>
                         </button>
 
-                        <a  class="logo">
+                        <a  href="/">
                             <img src="/assets/images/logo.png" alt="Molla Logo" width="105" height="25">
                         </a>
 
@@ -31,10 +31,14 @@
 
 
                                 </li>
+
+                                  {{#if userLoggedIn}}
                                 
                                 <li class="megamenu-container active ">
                                     <a href="/myaccount" >MY ACCOUNT</a>
                                 <li>
+
+                                    {{/if}}
                                
 
                                     <a href="#" ></a>
@@ -90,9 +94,14 @@
 
                          <div class="dropdown cart-dropdown">
 
+                              {{#if userLoggedIn}}
+
                             <a href="/logout"    aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <span>logout</span>
-                                
+                                {{else}}
+                                  <a href="/login" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                 <span>login</span>
+                              {{/if}}  
                         </a>
 
                        
