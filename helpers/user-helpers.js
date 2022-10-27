@@ -2863,12 +2863,15 @@ getProductsCount:()=>{
 })
 },
 
-getCartProductArrayOnly:()=>{
+getCartProductArrayOnly:(id)=>{
     
 
 
         return new Promise((resolve,reject)=>{
             db.get().collection(Ecommerce.CartCollection).aggregate([
+                {
+                  $match:{user:objectId(id)}
+                },
                {
                     $project:{
                         product:1,
@@ -2884,9 +2887,9 @@ getCartProductArrayOnly:()=>{
 
 },
 
-findAllWishlist:()=>{
+findAllWishlist:(id)=>{
     return new Promise(async(resolve,reject)=>{
-       let Allwishlist = await db.get().collection(Ecommerce.WishlistCollection).find().toArray()
+       let Allwishlist = await db.get().collection(Ecommerce.WishlistCollection).find({user:objectId(id)}).toArray()
 
        resolve(Allwishlist)
     })

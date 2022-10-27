@@ -76,7 +76,7 @@
 
                                                   {{#if this.stockleft}}
 
-                                                  {{#ifGotoCart ../user ../CartItems this._id }}
+                                                  {{#ifGotoCart  ../CartItems this._id }}
 
 
                                                    <a href="/cartview"  class="btn-product btn-cart "><span>go to cart</span></a>
@@ -98,7 +98,7 @@
                                         <div class="col-lg-6">
                                             <div class="product-body product-action-inner">
 
-                                                {{#Wish ../user ../Wish this._id }}
+                                                {{#Wish  ../Wish this._id }}
 
 
                                                 <button id="wishlistBu{{this._id}}" class="wishlistB" onclick="addToWishlist('{{../this._id}}')"><i class="fa fa-heart heartI" id="heartIcon{{../this._id}}"  aria-hidden="true"></i></button>

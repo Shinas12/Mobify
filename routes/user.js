@@ -105,16 +105,38 @@ let verify = (req,res,next)=>{
 
 
   let GotoCart=async(req,res,next)=>{
-    let cartItems = await LoginHelper.getCartProductArrayOnly()
-    res.CartItems = cartItems
-    next()
+    if(req.session.userLoggedIn){
+
+      let cartItems = await LoginHelper.getCartProductArrayOnly(req.session.user._id)
+      res.CartItems = cartItems
+      next()
+
+    }else{
+
+      let cartItems = []
+      res.CartItems = cartItems
+      next()
+
+    }
+   
   }
   
 
   let findAllWishlist=async(req,res,next)=>{
-    let Wishlist = await LoginHelper.findAllWishlist()
-    res.Wishlist = Wishlist
-    next() 
+    if(req.session.userLoggedIn){
+
+      let Wishlist = await LoginHelper.findAllWishlist(req.session.user._id)
+      res.Wishlist = Wishlist
+      next() 
+
+    }else{
+
+      let Wishlist = []
+      res.Wishlist = Wishlist
+      next() 
+
+    }
+   
   }
 
 

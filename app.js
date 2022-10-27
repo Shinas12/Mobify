@@ -31,21 +31,16 @@ const hbshelper = hbs.create({
 }
 },
 
-    ifGotoCart:(userId,CartDetails,ProdId,options)=>{
+    ifGotoCart:(CartDetails,ProdId,options)=>{
       
 
-      if(userId){
+     
        
      let UserCartfind = CartDetails.map((element)=>{
           
-          
-           let uId = objectId(userId).toString()
-
-           if(element.user.toString() == uId){
+        
                return element.product
-           }
-           
-
+    
       })
           
       if(UserCartfind[0]){
@@ -73,27 +68,19 @@ const hbshelper = hbs.create({
      
 
      
-    }else{
-      return options.inverse();
-    }
+   
   },
 
 
 
-  Wish:(userId,Wish,ProdId,options)=>{
+  Wish:(Wish,ProdId,options)=>{
   
    
-    if(userId){
+   
 
    let wish = Wish.map((element)=>{
-        
-        
-         let uId = objectId(userId).toString()
   
-         if(element.user.toString() == uId){
              return element.product
-         }
-         
   
     })
   
@@ -118,9 +105,7 @@ const hbshelper = hbs.create({
       return options.inverse(); 
     }
 
-  }else{
-     return options.inverse();
-  }
+
   
 
   
