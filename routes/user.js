@@ -461,7 +461,7 @@ router.get('/cart',verify,(req,res)=>{
   
 
   
-  if(Object.isValid(req.query.orderId)){
+  if(ObjectId.isValid(req.query.orderId)){
 
     LoginHelper.Addtocart(req.query.orderId,req.session.user._id).then((response)=>{
       res.redirect('/cartview')
@@ -1293,11 +1293,7 @@ router.post('/filteredProduct',findAllWishlist,GotoCart,(req,res)=>{
 //User Logout router
 
 router.get('/logout', function(req, res, next) {
-  req.session.userLoggedIn=false
- 
-
-  console.log(req)
-  
+  req.session.userLoggedIn=false 
   res.redirect('/')
 });
 
