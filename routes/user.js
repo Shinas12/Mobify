@@ -458,8 +458,7 @@ router.get('/product/:id',GotoCart,findAllWishlist,function(req, res, next) {
 //user cart handle router
 router.get('/cart',verify,(req,res)=>{
 
-  
-
+ 
   
   if(ObjectId.isValid(req.query.orderId)){
 
