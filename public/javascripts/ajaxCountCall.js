@@ -276,8 +276,7 @@ function Shipping (odrId,productId){
 
 
 function Addressfill (Customer,Housename){
-    console.log(Customer)
-    console.log(Housename)
+  
     $.ajax({
         url:'/filladdress',
         data:{

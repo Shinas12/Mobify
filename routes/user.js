@@ -1085,8 +1085,8 @@ router.post('/p', (req, res) => {
         "payment_method": "paypal"
     },
     "redirect_urls": {
-        "return_url": "http://localhost:3000/success?orderID="+orderId,
-        "cancel_url": "http://localhost:3000/cancel"
+        "return_url": "http://mobify.gq/success?orderID="+orderId,
+        "cancel_url": "http://mobify.gq/cancel"
     },
     "transactions": [{
         "item_list": {
@@ -1220,7 +1220,6 @@ router.get('/search',(req,res)=>{
 //search router
 router.post('/getProductDetails',(req,res)=>{
   let search = req.body.payload.trim()
-  console.log(search)
   LoginHelper.searchProduct(search).then((searchProduct)=>{
     res.send({payload:searchProduct})
   })

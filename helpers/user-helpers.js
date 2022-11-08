@@ -1644,7 +1644,7 @@ changePaymentStatus:(orderId)=>{
 },
 
 PaymentSuccessParty:(orderId,usrId)=>{
-    console.log("its order id da")
+   
     console.log(orderId)
     return new Promise((resolve,reject)=>{
 
